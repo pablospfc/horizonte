@@ -21,7 +21,7 @@
     <!-- /.box-header -->
     <div class="box-body">
       <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-      <table id="tblClientes" class="table table-bordered table-striped">
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="tblClientes" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>Razão Social</th>
@@ -38,12 +38,19 @@
           <td>{{cliente.responsavel}}</td>
           <td>{{cliente.cnpj}}</td>
           <td>{{cliente.telefone}}</td>
-          <td>{{cliente.status}}</td>
+          <td>
+            <span class="label" [ngClass]="{'label-warning': cliente.id_status_cliente == 3, 'label-success': cliente.id_status_cliente == 1, 'label-danger': cliente.id_status_cliente == 2}">
+              {{cliente.status}}
+            </span>
+          </td>
           <td>
             <button type="button"
-                    (click)="aprovar(cliente)"
-                    class="btn btn-success btn-xs">
-              <i class="fa fa-check" aria-hidden="true"></i>
+                    (click)="avaliar(cliente)"
+                    title="{{cliente.id_status_cliente == 1 ? 'Rejeitar' : 'Aprovar'}}"
+                    class="btn btn-sm"
+                    [ngClass]="{'btn-success': cliente.id_status_cliente != 1, 'btn-danger': cliente.id_status_cliente == 1}"
+                    >
+              <i class="fa" [ngClass]="{'fa-check': cliente.id_status_cliente != 1, 'fa-close': cliente.id_status_cliente == 1}" aria-hidden="true"></i>
             </button>
           </td>
         </tr>

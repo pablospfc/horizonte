@@ -13,6 +13,7 @@ import { LoginComponent } from './auth/login/login.component';
 import {ClienteModule} from "./cliente/cliente.module";
 import {DocumentoModule} from "./documento/documento.module";
 import {HttpClientModule} from "@angular/common/http";
+import {DataTablesModule} from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     ClienteModule,
     DocumentoModule,
-    HttpClientModule
+    HttpClientModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

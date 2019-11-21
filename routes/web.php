@@ -16,4 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get('clientes/listar',"ClientesController@index");
-Route::put('clientes/aprovar/{id}',"ClientesController@aprovar");
+Route::put('clientes/avaliar/{id}',"ClientesController@avaliar");

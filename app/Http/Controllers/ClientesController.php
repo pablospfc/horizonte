@@ -13,6 +13,7 @@ class ClientesController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $clientes;
+
     public function __construct()
     {
         $this->clientes = new Clientes();
@@ -29,11 +30,18 @@ class ClientesController extends Controller
         }
     }
 
-    public function aprovar(Request $request, $id)
+    public function avaliar(Request $request, $id)
     {
         try {
+            $data = $request->all();
+            if ($data['id_status_cliente'] <> 1)
+                $idStatusCliente = 1;
+            else
+                $idStatusCliente = 2;
+
             \App\Model\Clientes::where('id', $id)
-                ->update(['id_status_cliente' => 1]);
+                ->update(['id_status_cliente' => $idStatusCliente]);
+
             return response()->json(['message' => 'O cliente foi aprovado com sucesso.'], 200);
         } catch (\Exception $e) {
             \App\Model\Log::create(['message' => $e->getMessage()]);

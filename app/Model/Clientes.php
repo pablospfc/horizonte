@@ -25,6 +25,7 @@ class Clientes extends Model
         )
             ->from("clientes as cl")
             ->join("status_cliente as st", "cl.id_status_cliente", "=", "st.id")
+            ->orderBy("cl.responsavel")
             ->get()
             ->toArray();
     }

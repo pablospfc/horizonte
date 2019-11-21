@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/datatables.net-dt/css/jquery.dataTables.css"
             ],
             "scripts": [
               "src/assets/bower_components/jquery/dist/jquery.min.js",
@@ -48,7 +49,8 @@
               "src/assets/bower_components/fastclick/lib/fastclick.js",
               "src/assets/dist/js/adminlte.min.js",
               "src/assets/dist/js/pages/dashboard.js",
-              "src/assets/dist/js/demo.js"
+              "src/assets/dist/js/demo.js",
+              "node_modules/datatables.net/js/jquery.dataTables.js"
             ]
           },
           "configurations": {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ListClientesComponent } from './list-clientes/list-clientes.component';
 import { NewClientesComponent } from './new-clientes/new-clientes.component';
 import {RouterModule} from "@angular/router";
+import {DataTablesModule} from "angular-datatables";
 
 
 
@@ -10,7 +11,8 @@ import {RouterModule} from "@angular/router";
   declarations: [ListClientesComponent, NewClientesComponent],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    DataTablesModule
   ]
 })
 export class ClienteModule { }

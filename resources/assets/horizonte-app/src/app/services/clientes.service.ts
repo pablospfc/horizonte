@@ -22,8 +22,8 @@ export class ClientesService {
       );
   }
 
-  public approve(cliente) {
-    return this.http.put(`${this.api}/aprovar/${cliente.id}`,cliente)
+  public toEvaluate(cliente) {
+    return this.http.put(`${this.api}/avaliar/${cliente.id}`,cliente)
       .pipe(
         catchError(error => {
           return throwError(error.error);
