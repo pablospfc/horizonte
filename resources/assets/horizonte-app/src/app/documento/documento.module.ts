@@ -9,13 +9,17 @@ import { ListCertidoesComponent } from './list-certidoes/list-certidoes.componen
 import {ListBalencetesComponent} from "./list-balencetes/list-balencetes.component";
 import {ListFaturamentosComponent} from "./list-faturamentos/list-faturamentos.component";
 import { ListFolhasPagamentoComponent } from './list-folhas-pagamento/list-folhas-pagamento.component';
+import {RouterModule} from "@angular/router";
+import {FormsModule} from "@angular/forms";
 
 
 
 @NgModule({
   declarations: [NewDocumentoComponent, ListDocumentosComponent, ListFaturamentosComponent, ListBalencetesComponent, ListBoletosComponent, ListDeclaracoesComponent, ListContratosComponent, ListCertidoesComponent, ListFolhasPagamentoComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule,
+    FormsModule
   ]
 })
 export class DocumentoModule { }

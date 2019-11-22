@@ -30,6 +30,17 @@ class ClientesController extends Controller
         }
     }
 
+    public function listarAprovados() {
+        try {
+            $data = \App\Model\Clientes::where('id_status_cliente', 1)
+                ->get();
+            return response()->json($data,200);
+        }catch(\Exception $e) {
+          \App\Model\Log::create(['message' => $e->getMessage()]);
+          return response()->json(['message' => 'Não foi possível listar dados. Por favor tente novamente'],500);
+        }
+    }
+
     public function avaliar(Request $request, $id)
     {
         try {

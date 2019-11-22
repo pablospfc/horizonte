@@ -1,1 +1,71 @@
-<p>list-documentos works!</p>
+<section class="content-header">
+  <h1>
+    Documentos
+    <small>Listar</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Documentos</li>
+    <li class="active">Listar Documentos</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="box box-primary">
+    <div class="box-header">
+      <i class="ion ion-clipboard"></i>
+
+      <h3 class="box-title">Lista de Documentos</h3>
+
+      <div class="box-tools pull-right">
+        <!-- BOTÕES DE ADICIONAR-->
+        <button type="button" class="btn btn-success pull-right" [routerLink]="['/new-documento']"><i class="fa fa-upload"></i> Upload</button>
+      </div>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+      <table id="tblPessoa" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Cliente</th>
+          <th>Tipo de Documento</th>
+          <th>Mês</th>
+          <th>Ano</th>
+          <th>Arquivo</th>
+          <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let documento of documentos">
+          <td>{{documento.cliente}}</td>
+          <td>{{documento.tipo_documento}}</td>
+          <td>{{documento.mes ? documento.mes : 'Não se aplica'}}</td>
+          <td>{{documento.ano ? documento.ano : 'Não se aplica'}}</td>
+          <td>
+            <button type="button"
+                      class="btn btn-default btn-xs">
+            <i class="fa fa-download" aria-hidden="true"></i>
+          </button>
+          </td>
+          <td>
+            <button type="button"
+                    [routerLink]="['/update-documento/'+documento.id]"
+                    class="btn btn-default btn-xs">
+              <i class="fa fa-edit" aria-hidden="true"></i>
+            </button>
+            <button type="button"
+                    (click)="remover(documento.id)"
+                    class="btn btn-default btn-xs">
+              <i class="fa fa-remove" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+
+  </div>
+</section>
+

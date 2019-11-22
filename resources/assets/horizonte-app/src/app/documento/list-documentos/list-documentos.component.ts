@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListDocumentosComponent implements OnInit {
 
+  documentos = [];
   constructor() { }
 
   ngOnInit() {
   }
+
+  remover(id: number) {
+
+  }
+
+
 
 }

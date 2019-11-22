@@ -13,6 +13,7 @@ import {ListFaturamentosComponent} from "./documento/list-faturamentos/list-fatu
 import {NewDocumentoComponent} from "./documento/new-documento/new-documento.component";
 import {ListFolhasPagamentoComponent} from "./documento/list-folhas-pagamento/list-folhas-pagamento.component";
 import {ListBalencetesComponent} from "./documento/list-balencetes/list-balencetes.component";
+import {ListDocumentosComponent} from "./documento/list-documentos/list-documentos.component";
 
 
 const routes: Routes = [
@@ -55,6 +56,10 @@ const routes: Routes = [
       {
         path: 'list-faturamentos',
         component: ListFaturamentosComponent
+      },
+      {
+        path: 'list-documentos',
+        component: ListDocumentosComponent
       },
       {
         path: 'new-documento',

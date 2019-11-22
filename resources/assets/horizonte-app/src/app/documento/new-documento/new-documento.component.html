@@ -1,1 +1,146 @@
-<p>new-documento works!</p>
+<section class="content-header">
+  <h1>
+    Documentos
+    <small>{{documento.id ? 'Atualizar' : 'Adicionar'}}</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="#">Documento</a></li>
+    <li class="active">{{documento.id ? 'Atualizar' : 'Adicionar'}}</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">{{documento.id ? 'Atualizar' : 'Adicionar'}} Documento</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form #documentoForm="ngForm" name="documentoForm" role="form" (ngSubmit)="onSubmit(documentoForm)">
+          <input type="hidden" name="id" value="id" [(ngModel)]="documento.id"/>
+
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="id_cliente">Cliente</label>
+                  <select class="form-control"
+                          id="id_cliente"
+                          [(ngModel)]="documento.id_cliente"
+                          [required]="true"
+                          name="id_cliente">
+                    <option *ngFor="let cliente of clientes" [value]="cliente.id">{{cliente.responsavel}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="id_tipo_documento">Tipo de Documento</label>
+                  <select class="form-control"
+                          id="id_tipo_documento"
+                          [(ngModel)]="documento.id_tipo_documento"
+                          [required]="true"
+                          name="id_tipo_documento">
+                    <option *ngFor="let tipos of tiposDocumentos" [value]="tipos">{{tipos.nome}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group" *ngIf="documento.id_tipo_documento == 2 || documento.id_tipo_documento == 3 || documento.id_tipo_documento == 4">
+                  <label for="id_mes">Mês</label>
+                  <select class="form-control"
+                          id="id_mes"
+                          [(ngModel)]="documento.id_mes"
+                          [required]="false"
+                          name="id_mes">
+                    <option [value]="1">Janeiro</option>
+                    <option [value]="2">Fevereiro</option>
+                    <option [value]="3">Março</option>
+                    <option [value]="4">Abril</option>
+                    <option [value]="5">Maio</option>
+                    <option [value]="6">Junho</option>
+                    <option [value]="7">Julho</option>
+                    <option [value]="8">Agosto</option>
+                    <option [value]="9">Setembro</option>
+                    <option [value]="10">Outubro</option>
+                    <option [value]="11">Novembro</option>
+                    <option [value]="12">Dezembro</option>
+                  </select>
+                </div>
+
+                <div class="form-group" *ngIf="documento.id_tipo_documento != 1">
+                  <label for="ano">Ano</label>
+                  <input type="text"
+                         class="form-control"
+                         id="ano"
+                         name="ano"
+                         [(ngModel)]="documento.ano"
+                         [required]="false"
+                         placeholder="Ano"/>
+                </div>
+
+                <div class="form-group">
+                  <label for="descricao">Descrição</label>
+                  <input type="text"
+                         class="form-control"
+                         id="descricao"
+                         name="descricao"
+                         [(ngModel)]="documento.descricao"
+                         [required]="false"
+                         placeholder="Descrição"/>
+                </div>
+
+                <div class="form-group">
+                  <label for="arquivo">Arquivo</label>
+                  <input type="file" id="arquivo"/>
+
+                </div>
+
+                <div class="form-group">
+                  <button type="button" (click)="addDocumento(documento)" class="btn btn-primary">Adicionar Arquivo</button>
+                </div>
+
+                <table id="tblDocumentos" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Tipo</th>
+                    <th>Nome do Documento</th>
+                    <th>Mês</th>
+                    <th>Ano</th>
+                    <th>Ação</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let documento of documentos">
+                    <td>{{documento.tipo_documento}}</td>
+                    <td>{{documento.nome_documento}}</td>
+                    <td>{{documento.mes}}</td>
+                    <td>{{documento.ano}}</td>
+                    <td>
+                      <button type="button"
+                              class="btn btn-default btn-xs">
+                        <i class="fa fa-remove" aria-hidden="true"></i>
+                      </button>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+              <button type="submit" class="btn btn-primary" [disabled]="!documentoForm.valid">Enviar</button>
+              <button type="button" class="btn btn-success" [routerLink]="['/list-documentos']">Voltar</button>
+            </div>
+
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>

@@ -22,6 +22,15 @@ export class ClientesService {
       );
   }
 
+  public listApproved() {
+    return this.http.get<Clientes[]>(`${this.api}/listarAprovados`)
+      .pipe(
+        map(data => {
+          return data;
+        })
+      )
+  }
+
   public toEvaluate(cliente) {
     return this.http.put(`${this.api}/avaliar/${cliente.id}`,cliente)
       .pipe(
