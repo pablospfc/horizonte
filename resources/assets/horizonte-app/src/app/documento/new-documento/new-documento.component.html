@@ -20,8 +20,7 @@
         </div>
         <!-- /.box-header -->
         <!-- form start -->
-        <form #documentoForm="ngForm" name="documentoForm" role="form" (ngSubmit)="onSubmit(documentoForm)">
-          <input type="hidden" name="id" value="id" [(ngModel)]="documento.id"/>
+        <form #documentoForm="ngForm" name="documentoForm" role="form" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
 
           <div class="box-body">
             <div class="row">
@@ -44,7 +43,7 @@
                           [(ngModel)]="documento.id_tipo_documento"
                           [required]="true"
                           name="id_tipo_documento">
-                    <option *ngFor="let tipos of tiposDocumentos" [value]="tipos">{{tipos.nome}}</option>
+                    <option *ngFor="let tipo of tiposDocumentos" [value]="tipo.id">{{tipo.nome}}</option>
                   </select>
                 </div>
 
@@ -55,18 +54,7 @@
                           [(ngModel)]="documento.id_mes"
                           [required]="false"
                           name="id_mes">
-                    <option [value]="1">Janeiro</option>
-                    <option [value]="2">Fevereiro</option>
-                    <option [value]="3">Março</option>
-                    <option [value]="4">Abril</option>
-                    <option [value]="5">Maio</option>
-                    <option [value]="6">Junho</option>
-                    <option [value]="7">Julho</option>
-                    <option [value]="8">Agosto</option>
-                    <option [value]="9">Setembro</option>
-                    <option [value]="10">Outubro</option>
-                    <option [value]="11">Novembro</option>
-                    <option [value]="12">Dezembro</option>
+                    <option *ngFor="let mes of meses" [value]="mes.id">{{mes.nome}}</option>
                   </select>
                 </div>
 
@@ -94,41 +82,43 @@
 
                 <div class="form-group">
                   <label for="arquivo">Arquivo</label>
-                  <input type="file" id="arquivo"/>
+                  <input type="file" id="arquivo" (change)="inputFileChange($event)" [(ngModel)]="documento.nome_arquivo" name="nome_arquivo"/>
 
                 </div>
 
                 <div class="form-group">
-                  <button type="button" (click)="addDocumento(documento)" class="btn btn-primary">Adicionar Arquivo</button>
+                  <button type="button" (click)="addDocumento(documentoForm)" class="btn btn-primary">Adicionar Arquivo</button>
                 </div>
 
-                <table id="tblDocumentos" class="table table-bordered table-striped">
-                  <thead>
-                  <tr>
-                    <th>Tipo</th>
-                    <th>Nome do Documento</th>
-                    <th>Mês</th>
-                    <th>Ano</th>
-                    <th>Ação</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <tr *ngFor="let documento of documentos">
-                    <td>{{documento.tipo_documento}}</td>
-                    <td>{{documento.nome_documento}}</td>
-                    <td>{{documento.mes}}</td>
-                    <td>{{documento.ano}}</td>
-                    <td>
-                      <button type="button"
-                              class="btn btn-default btn-xs">
-                        <i class="fa fa-remove" aria-hidden="true"></i>
-                      </button>
-                    </td>
-                  </tr>
-                  </tbody>
-                </table>
-
               </div>
+
+              <table id="tblDocumentos" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Tipo</th>
+                  <th>Nome do Documento</th>
+                  <th>Mês</th>
+                  <th>Ano</th>
+                  <th>Ação</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let doc of documentos">
+                  <td>{{doc.id_tipo_documento}}</td>
+                  <td>{{doc.nome_arquivo}}</td>
+                  <td>{{doc.id_mes ? doc.id_mes : 'Não se aplica'}}</td>
+                  <td>{{doc.ano ? doc.ano : 'Não se aplica'}}</td>
+                  <td>
+                    <button type="button"
+                            (click)="excluirArquivo(doc)"
+                            class="btn btn-danger btn-xs">
+                      <i class="fa fa-remove" aria-hidden="true"></i>
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+
             </div>
             <!-- /.box-body -->
             <div class="box-footer text-center">

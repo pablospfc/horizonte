@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {map} from "rxjs/operators";
+import {catchError, map} from "rxjs/operators";
+import {throwError} from "rxjs";
+import {FileUploader} from "ng2-file-upload";
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +21,16 @@ export class DocumentoclienteService {
           return data;
         })
       );
+  }
+
+  public save(documentos) {
+  //  this.uploader.uploadAll();
+    return this.http.post(`${this.api}/cadastrar`,documentos)
+      .pipe(
+        catchError(error => {
+          return throwError(error.error);
+        })
+      )
   }
 
 }

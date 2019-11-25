@@ -23,4 +23,7 @@ class DocumentosCliente extends Model
         "md5_arquivo"
     ];
 
+    public function salvar($data) {
+
+    }
 }

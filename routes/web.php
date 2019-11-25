@@ -18,7 +18,8 @@ Route::get('/', function () {
 Route::get('clientes/listar',"ClientesController@index");
 Route::get('clientes/listarAprovados',"ClientesController@listarAprovados");
 Route::put('clientes/avaliar/{id}',"ClientesController@avaliar");
-Route::post('documentoscliente/cadastrar',"DocumentosController@store");
-Route::post('documentoscliente/atualizar',"DocumentosController@update");
+Route::post('documentoscliente/cadastrar',"DocumentosClienteController@store");
+Route::post('documentoscliente/atualizar',"DocumentosClienteController@update");
 
 Route::get('tiposdocumentos/listar',"TiposDocumentosController@index");
+Route::get('meses/listar',"MesesController@index");

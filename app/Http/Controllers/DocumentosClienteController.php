@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\DocumentosCliente;
 use Illuminate\Http\Request;
 
 class DocumentosClienteController extends Controller
@@ -11,6 +12,13 @@ class DocumentosClienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    private $documentosCliente;
+
+    function __construct()
+    {
+        $this->documentosCliente = new DocumentosCliente();
+    }
+
     public function index()
     {
         //
@@ -34,7 +42,16 @@ class DocumentosClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+            //$this->documentosCliente->salvar($request->all());
+            $dados = $request->all();
+
+            error_log(var_export($dados,true));
+            return response()->json(['message' => 'Documentos enviados com sucesso'],200 );
+        }catch(\Exception $e) {
+            \App\Model\Log::create(['message' => $e->getMessage()]);
+            return response()->json(['message'=> 'Ocorreu um problema ao enviar documentos. Por favor tente novamente'],500);
+        }
     }
 
     /**

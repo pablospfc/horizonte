@@ -11,6 +11,7 @@ import {ListFaturamentosComponent} from "./list-faturamentos/list-faturamentos.c
 import { ListFolhasPagamentoComponent } from './list-folhas-pagamento/list-folhas-pagamento.component';
 import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import {FileUploadModule} from "ng2-file-upload";
 
 
 
@@ -19,7 +20,8 @@ import {FormsModule} from "@angular/forms";
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    FileUploadModule
   ]
 })
 export class DocumentoModule { }
