@@ -14,8 +14,7 @@ import {ClienteModule} from "./cliente/cliente.module";
 import {DocumentoModule} from "./documento/documento.module";
 import {HttpClientModule} from "@angular/common/http";
 import {DataTablesModule} from "angular-datatables";
-import { FileUploadModule } from 'ng2-file-upload';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +33,7 @@ import { FileUploadModule } from 'ng2-file-upload';
     DocumentoModule,
     HttpClientModule,
     DataTablesModule,
-    FileUploadModule
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

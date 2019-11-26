@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {NewDocumentoComponent} from "../new-documento/new-documento.component";
 
 @Component({
   selector: 'app-list-documentos',
@@ -8,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class ListDocumentosComponent implements OnInit {
 
   documentos = [];
-  constructor() { }
+  modalRef: BsModalRef;
+  constructor(private modalService: BsModalService) { }
 
   ngOnInit() {
   }
@@ -16,6 +19,12 @@ export class ListDocumentosComponent implements OnInit {
   remover(id: number) {
 
   }
+
+  openModalUpload() {
+    this.modalRef = this.modalService.show(NewDocumentoComponent);
+  }
+
+
 
 
 

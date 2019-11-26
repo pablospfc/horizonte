@@ -30,7 +30,7 @@ export class DocumentoclienteService {
 
   public save(documentos) {
   //  this.uploader.uploadAll();
-    return this.http.post(`${this.api}/cadastrar`, documentos, this.headers)
+    return this.http.post(`${this.api}/cadastrar`, documentos)
       .pipe(
         catchError(error => {
           return throwError(error.error);

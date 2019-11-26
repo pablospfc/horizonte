@@ -6,6 +6,7 @@ import {ClientesService} from "../../services/clientes.service";
 import {TiposdocumentosService} from "../../services/tiposdocumentos.service";
 import {MesesService} from "../../services/meses.service";
 import { FileUploader, FileLikeObject } from 'ng2-file-upload';
+import {BsModalRef} from "ngx-bootstrap";
 @Component({
   selector: 'app-new-documento',
   templateUrl: './new-documento.component.html',
@@ -14,14 +15,12 @@ import { FileUploader, FileLikeObject } from 'ng2-file-upload';
 export class NewDocumentoComponent implements OnInit {
 
   documento: DocumentosCliente;
-  documentos = [];
-  arquivos = [];
   meses = [];
   public clientes = [];
   public tiposDocumentos = [];
   private file: File;
   private formData = new FormData();
-
+  modalRef: BsModalRef;
   constructor(private documentoService: DocumentoclienteService,
               private tiposDocumentosService: TiposdocumentosService,
               private clienteService: ClientesService,
@@ -34,9 +33,13 @@ export class NewDocumentoComponent implements OnInit {
     this.getMeses();
   }
 
-  onSubmit() {
-    console.log(this.documentos);
-    this.documentoService.save(this.documentos)
+  hide(){
+    this.modalRef.hide();
+  }
+
+  onSubmit(form: NgForm) {
+    this.prepareDados(form.value);
+    this.documentoService.save(this.formData)
       .subscribe(response => {
         console.log(response);
       }, error => {
@@ -71,25 +74,13 @@ export class NewDocumentoComponent implements OnInit {
       });
   }
 
-  excluirArquivo(documento){
-    let index = this.documentos.findIndex(d => d === documento); //find index in your array
-    this.documentos.splice(index, 1);//remove element from array
-  }
-
-  addDocumento(form: NgForm) {
-    form.value.nome_arquivo = this.file.name;
+  prepareDados(formulario) {
+    this.formData.append('id_cliente', formulario.id_cliente);
+    this.formData.append('id_tipo_documento', formulario.id_tipo_documento);
+    this.formData.append('id_mes', formulario.id_mes);
+    this.formData.append('ano', formulario.ano);
+    this.formData.append('descricao', formulario.descricao);
     this.formData.append('arquivo', this.file);
-    form.value.arquivo = this.formData;
-    //this.arquivos.push(this.file);
-    /*
-    this.formData.append('arquivo', this.file);
-    this.formData.append('id_cliente', form.value.id_cliente);
-    this.formData.append('id_tipo_documento', form.value.id_tipo_documento);
-    this.formData.append('id_mes', form.value.id_mes);
-    this.formData.append('ano', form.value.ano);
-    this.formData.append('descricao', form.value.descricao);
-    */
-    this.documentos.push(form.value);
   }
 
 

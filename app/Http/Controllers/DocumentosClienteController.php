@@ -43,10 +43,8 @@ class DocumentosClienteController extends Controller
     public function store(Request $request)
     {
         try{
-            //$this->documentosCliente->salvar($request->all());
-            $dados = $request->all();
-
-            error_log(var_export($dados,true));
+            error_log($request->file('arquivo'));
+            $this->documentosCliente->salvar($request->all(), $request->file('arquivo'));
             return response()->json(['message' => 'Documentos enviados com sucesso'],200 );
         }catch(\Exception $e) {
             \App\Model\Log::create(['message' => $e->getMessage()]);
