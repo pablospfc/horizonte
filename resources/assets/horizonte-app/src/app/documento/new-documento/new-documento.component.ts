@@ -36,18 +36,17 @@ export class NewDocumentoComponent implements OnInit {
 
   onSubmit() {
     console.log(this.documentos);
-    this.documentoService.save(this.formData)
+    this.documentoService.save(this.documentos)
       .subscribe(response => {
         console.log(response);
       }, error => {
         console.log(error);
-      })
+      });
   }
 
   inputFileChange(event) {
     if (event.target.files && event.target.files[0]) {
       this.file = event.target.files[0];
-      this.formData.append('arquivo', this.file);
     }
   }
 
@@ -62,7 +61,7 @@ export class NewDocumentoComponent implements OnInit {
     this.tiposDocumentosService.list()
       .subscribe(response => {
         this.tiposDocumentos = response;
-      })
+      });
   }
 
   getMeses() {
@@ -79,8 +78,17 @@ export class NewDocumentoComponent implements OnInit {
 
   addDocumento(form: NgForm) {
     form.value.nome_arquivo = this.file.name;
+    this.formData.append('arquivo', this.file);
     form.value.arquivo = this.formData;
     //this.arquivos.push(this.file);
+    /*
+    this.formData.append('arquivo', this.file);
+    this.formData.append('id_cliente', form.value.id_cliente);
+    this.formData.append('id_tipo_documento', form.value.id_tipo_documento);
+    this.formData.append('id_mes', form.value.id_mes);
+    this.formData.append('ano', form.value.ano);
+    this.formData.append('descricao', form.value.descricao);
+    */
     this.documentos.push(form.value);
   }
 
