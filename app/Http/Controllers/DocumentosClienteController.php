@@ -37,25 +37,49 @@ class DocumentosClienteController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        try{
-            error_log($request->file('arquivo'));
-            $this->documentosCliente->salvar($request->all(), $request->file('arquivo'));
-            return response()->json(['message' => 'Documentos enviados com sucesso'],200 );
-        }catch(\Exception $e) {
+        try {
+            $nameFile = null;
+            $dados = $request->all();
+            // Verifica se informou o arquivo e se é válido
+            if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()) {
+
+                // Define um aleatório para o arquivo baseado no timestamps atual
+                $name = uniqid(date('HisYmd'));
+
+                // Recupera a extensão do arquivo
+                $extension = $request->arquivo->extension();
+
+                // Define finalmente o nome
+                $nameFile = "{$name}.{$extension}";
+
+                // Faz o upload:
+                $upload = $request->arquivo->storeAs('documentos', $nameFile);
+                // Se tiver funcionado o arquivo foi armazenado em storage/app/public/categories/nomedinamicoarquivo.extensao
+
+                $dados['nome_arquivo'] = $request->arquivo->getClientOriginalName();
+                $dados['md5_arquivo'] = $nameFile;
+                unset($dados['arquivo']);
+                if ($upload) {
+                    $this->documentosCliente->salvar($dados);
+                    return response()->json(['message' => 'Documentos enviados com sucesso'], 200);
+                }
+            }
+
+        } catch (\Exception $e) {
             \App\Model\Log::create(['message' => $e->getMessage()]);
-            return response()->json(['message'=> 'Ocorreu um problema ao enviar documentos. Por favor tente novamente'],500);
+            return response()->json(['message' => 'Ocorreu um problema ao enviar documentos. Por favor tente novamente'], 500);
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -66,7 +90,7 @@ class DocumentosClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -77,8 +101,8 @@ class DocumentosClienteController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -89,7 +113,7 @@ class DocumentosClienteController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

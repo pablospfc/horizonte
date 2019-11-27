@@ -6,6 +6,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Self_;
 
 class DocumentosCliente extends Model
 {
@@ -24,10 +25,7 @@ class DocumentosCliente extends Model
         "md5_arquivo"
     ];
 
-    public function salvar($data, $arquivo) {
-        $name = uniqid(date('HisYmd'));
-        $data['arquivo'];
-        $arquivo->extension();
-        //error_log($data['arquivo']);
+    public function salvar($data) {
+        return self::create($data);
     }
 }
