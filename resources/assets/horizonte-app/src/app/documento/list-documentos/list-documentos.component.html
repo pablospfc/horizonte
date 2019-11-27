@@ -25,7 +25,7 @@
     <!-- /.box-header -->
     <div class="box-body">
       <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
-      <table id="tblPessoa" class="table table-bordered table-striped">
+      <table id="tblDocumentos" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>Cliente</th>
@@ -33,7 +33,8 @@
           <th>Mês</th>
           <th>Ano</th>
           <th>Arquivo</th>
-          <th>Ação</th>
+          <th>Editar</th>
+          <th>Excluir</th>
         </tr>
         </thead>
         <tbody>
@@ -44,20 +45,23 @@
           <td>{{documento.ano ? documento.ano : 'Não se aplica'}}</td>
           <td>
             <button type="button"
-                      class="btn btn-default btn-xs">
+                      (click)="downloadFile(documento.md5_arquivo)"
+                      class="btn btn-info btn-sm">
             <i class="fa fa-download" aria-hidden="true"></i>
           </button>
           </td>
           <td>
             <button type="button"
-                    [routerLink]="['/update-documento/'+documento.id]"
-                    class="btn btn-default btn-xs">
-              <i class="fa fa-edit" aria-hidden="true"></i>
+                    (click)="openModalUpload(documento.id)"
+                    class="btn btn-success btn-sm">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
             </button>
+          </td>
+          <td>
             <button type="button"
                     (click)="remover(documento.id)"
-                    class="btn btn-default btn-xs">
-              <i class="fa fa-remove" aria-hidden="true"></i>
+                    class="btn btn-danger btn-sm">
+              <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
           </td>
         </tr>

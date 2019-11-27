@@ -20,6 +20,8 @@ Route::get('clientes/listarAprovados',"ClientesController@listarAprovados");
 Route::put('clientes/avaliar/{id}',"ClientesController@avaliar");
 Route::post('documentoscliente/cadastrar',"DocumentosClienteController@store");
 Route::post('documentoscliente/atualizar',"DocumentosClienteController@update");
+Route::get('documentoscliente/listar',"DocumentosClienteController@index");
+Route::get('documentoscliente/download/{file}',"DocumentosClienteController@downloadFile");
 
 Route::get('tiposdocumentos/listar',"TiposDocumentosController@index");
 Route::get('meses/listar',"MesesController@index");

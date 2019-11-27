@@ -25,6 +25,21 @@ class DocumentosCliente extends Model
         "md5_arquivo"
     ];
 
+    public function getAll() {
+        return self::select(
+            "doc.*",
+            "mes.nome as mes",
+            "tdc.nome as tipo_documento",
+            "cli.responsavel as cliente"
+        )
+            ->from("documentos_cliente as doc")
+            ->leftJoin("meses as mes", "doc.id_mes", "=" , "mes.id")
+            ->join("clientes as cli", "doc.id_cliente", "=" , "cli.id")
+            ->join("tipos_documentos as tdc", "doc.id_tipo_documento", "=" , "tdc.id")
+            ->get()
+            ->toArray();
+    }
+
     public function salvar($data) {
         return self::create($data);
     }

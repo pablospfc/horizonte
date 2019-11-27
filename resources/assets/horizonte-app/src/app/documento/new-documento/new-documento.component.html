@@ -44,7 +44,7 @@
             </select>
           </div>
 
-          <div class="form-group" *ngIf="documento.id_tipo_documento != 1">
+          <div class="form-group" *ngIf="documento.id_tipo_documento && documento.id_tipo_documento != 1">
             <label for="ano">Ano</label>
             <input type="text"
                    class="form-control"

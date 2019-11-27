@@ -21,7 +21,18 @@ class DocumentosClienteController extends Controller
 
     public function index()
     {
-        //
+        try {
+            $data = $this->documentosCliente->getAll();
+            return response()->json($data,200);
+        }catch(\Exception $e) {
+            \App\Model\Log::create(['message' => $e->getMessage()]);
+            return response()->json(['message' => 'Ocorreu um problema ao listar documentos'],500 );
+        }
+    }
+
+    public function downloadFile($fileName) {
+        $file_path = storage_path('/app/documentos/'.$fileName);
+        return response()->download($file_path);
     }
 
     /**

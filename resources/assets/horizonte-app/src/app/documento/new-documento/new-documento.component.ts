@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import {Component, OnInit, EventEmitter, Input} from '@angular/core';
 import {DocumentosCliente} from '../../models/documentoscliente.model';
 import {DocumentoclienteService} from '../../services/documentocliente.service';
 import {NgForm} from '@angular/forms';
@@ -13,7 +13,7 @@ import {BsModalRef} from 'ngx-bootstrap';
   styleUrls: ['./new-documento.component.scss']
 })
 export class NewDocumentoComponent implements OnInit {
-
+@Input() id: number;
   documento: DocumentosCliente;
   meses = [];
   public clientes = [];
@@ -31,6 +31,7 @@ export class NewDocumentoComponent implements OnInit {
     this.getClientes();
     this.getTiposDocumentos();
     this.getMeses();
+    console.log(this.id);
   }
 
   hide() {
@@ -75,11 +76,12 @@ export class NewDocumentoComponent implements OnInit {
   }
 
   prepareDados(formulario) {
-    this.formData.append('id_cliente', formulario.id_cliente);
-    this.formData.append('id_tipo_documento', formulario.id_tipo_documento);
-    this.formData.append('id_mes', JSON.stringify(formulario.id_mes));
-    this.formData.append('ano', JSON.stringify(formulario.ano));
-    this.formData.append('descricao', JSON.stringify(formulario.descricao));
+    //adiciona valores do formulários no objeto formData
+    formulario.id_cliente ? this.formData.append('id_cliente', formulario.id_cliente) : null;
+    formulario.id_tipo_documento ? this.formData.append('id_tipo_documento', formulario.id_tipo_documento) : null;
+    formulario.id_mes ? this.formData.append('id_mes', formulario.id_mes ? formulario.id_mes : null) : null;
+    formulario.ano ? this.formData.append('ano', formulario.ano ? formulario.ano : null) : null;
+    formulario.descricao ? this.formData.append('descricao', formulario.descricao ? formulario.descricao : null) :null;
     this.formData.append('arquivo', this.file);
   }
 
