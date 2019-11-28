@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Input} from '@angular/core';
+import {Component, OnInit, EventEmitter, Input, ViewChild} from '@angular/core';
 import {DocumentosCliente} from '../../models/documentoscliente.model';
 import {DocumentoclienteService} from '../../services/documentocliente.service';
 import {NgForm} from '@angular/forms';
@@ -7,6 +7,8 @@ import {TiposdocumentosService} from '../../services/tiposdocumentos.service';
 import {MesesService} from '../../services/meses.service';
 import { FileUploader, FileLikeObject } from 'ng2-file-upload';
 import {BsModalRef} from 'ngx-bootstrap';
+import {AlertService} from "../../services/alert.service";
+import {ListDocumentosComponent} from "../list-documentos/list-documentos.component";
 @Component({
   selector: 'app-new-documento',
   templateUrl: './new-documento.component.html',
@@ -14,33 +16,36 @@ import {BsModalRef} from 'ngx-bootstrap';
 })
 export class NewDocumentoComponent implements OnInit {
 @Input() id: number;
+
   documento: DocumentosCliente;
   meses = [];
   public clientes = [];
   public tiposDocumentos = [];
   private file: File;
   private formData = new FormData();
-  modalRef: BsModalRef;
   constructor(private documentoService: DocumentoclienteService,
               private tiposDocumentosService: TiposdocumentosService,
               private clienteService: ClientesService,
-              private mesesService: MesesService) { }
+              private mesesService: MesesService,
+              private modalRef: BsModalRef,
+              private alertService: AlertService) { }
 
   ngOnInit() {
     this.documento = new DocumentosCliente();
     this.getClientes();
     this.getTiposDocumentos();
     this.getMeses();
-    console.log(this.id);
   }
 
   onSubmit(form: NgForm) {
     this.prepareDados(form.value);
     this.documentoService.save(this.formData)
       .subscribe(response => {
-        console.log(response);
+        const message = (response as any).message;
+        this.alertService.success(message);
       }, error => {
-        console.log(error);
+        const message = (error as any).message;
+        this.alertService.error(message);
       });
   }
 
@@ -69,6 +74,10 @@ export class NewDocumentoComponent implements OnInit {
       .subscribe(response => {
         this.meses = response;
       });
+  }
+
+  close(){
+    this.modalRef.hide();
   }
 
   prepareDados(formulario) {

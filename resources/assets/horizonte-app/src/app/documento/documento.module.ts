@@ -12,16 +12,20 @@ import { ListFolhasPagamentoComponent } from './list-folhas-pagamento/list-folha
 import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {FileUploadModule} from "ng2-file-upload";
+import {AppModule} from "../app.module";
+import {AlertMessageComponent} from "../alert/alert-message.component";
+import {AlertModule} from "ngx-bootstrap";
 
 
 
 @NgModule({
-  declarations: [NewDocumentoComponent, ListDocumentosComponent, ListFaturamentosComponent, ListBalencetesComponent, ListBoletosComponent, ListDeclaracoesComponent, ListContratosComponent, ListCertidoesComponent, ListFolhasPagamentoComponent],
+  declarations: [NewDocumentoComponent, ListDocumentosComponent, ListFaturamentosComponent, ListBalencetesComponent, ListBoletosComponent, ListDeclaracoesComponent, ListContratosComponent, ListCertidoesComponent, ListFolhasPagamentoComponent, AlertMessageComponent],
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
-    FileUploadModule
+    FileUploadModule,
+    AlertModule
   ]
 })
 export class DocumentoModule { }

@@ -1,9 +1,10 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
 import {NewDocumentoComponent} from "../new-documento/new-documento.component";
 import {DocumentosCliente} from "../../models/documentoscliente.model";
 import {DocumentoclienteService} from "../../services/documentocliente.service";
 import {initialState} from "ngx-bootstrap/timepicker/reducer/timepicker.reducer";
+import {AlertService} from "../../services/alert.service";
 
 @Component({
   selector: 'app-list-documentos',
@@ -11,11 +12,12 @@ import {initialState} from "ngx-bootstrap/timepicker/reducer/timepicker.reducer"
   styleUrls: ['./list-documentos.component.scss']
 })
 export class ListDocumentosComponent implements OnInit {
-
   documentos = [];
   modalRef: BsModalRef;
   id: number;
-  constructor(private modalService: BsModalService, private documentoService: DocumentoclienteService) { }
+  constructor(private modalService: BsModalService,
+              private documentoService: DocumentoclienteService,
+              private alertService: AlertService) { }
 
   ngOnInit() {
     this.listar();
@@ -58,11 +60,14 @@ export class ListDocumentosComponent implements OnInit {
   confirm(): void {
     this.documentoService.remove(this.id)
       .subscribe(response => {
-        console.log('Excluído com sucesso');
+        const message = (response as any).message;
+        this.alertService.success(message);
       }, error => {
-        console.log('Erro ao excluir' + error);
+        const message = (error as any).message;
+        this.alertService.error(message);
       });
     this.modalRef.hide();
+    this.listar();
   }
 
   decline(): void {

@@ -1,0 +1,4 @@
+<!--<div *ngIf="message" [dismissOnTimeout]="alert.timeout" [ngClass]="message.cssClass">{{message.text}}</div>-->
+
+<alert *ngIf="message" [type]="message.type" [dismissOnTimeout]="message.timeout" >{{ message.text }}</alert>
+

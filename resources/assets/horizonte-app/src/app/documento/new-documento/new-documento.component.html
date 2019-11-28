@@ -1,10 +1,11 @@
 
   <div class="modal-header">
     <h4 class="modal-title pull-left">Upload de Arquivos</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
+  <app-alert-message></app-alert-message>
   <form #documentoForm="ngForm" name="documentoForm" role="form" (ngSubmit)="onSubmit(documentoForm)">
     <div class="modal-body">
 

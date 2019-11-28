@@ -16,7 +16,7 @@
       <i class="ion ion-clipboard"></i>
 
       <h3 class="box-title">Lista de Documentos</h3>
-
+      <app-alert-message></app-alert-message>
       <div class="box-tools pull-right">
         <!-- BOTÕES DE ADICIONAR-->
         <button type="button" class="btn btn-success pull-right" (click)="openModalUpload()"><i class="fa fa-upload"></i> Upload</button>
@@ -93,8 +93,8 @@
     Confirma a exclusão deste documento?
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
-    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+    <button type="button" class="btn btn-primary" (click)="confirm()">Sim</button>
+    <button type="button" class="btn btn-default" (click)="decline()">Não</button>
   </div>
 </div>
 </ng-template>

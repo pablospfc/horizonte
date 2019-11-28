@@ -15,6 +15,8 @@ import {DocumentoModule} from "./documento/documento.module";
 import {HttpClientModule} from "@angular/common/http";
 import {DataTablesModule} from "angular-datatables";
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AlertMessageComponent } from './alert/alert-message.component';
+import {AlertModule} from "ngx-bootstrap";
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,18 +26,21 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     FooterComponent,
     MenuComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ClienteModule,
-    DocumentoModule,
     HttpClientModule,
     DataTablesModule,
-    ModalModule.forRoot()
+    DocumentoModule,
+    ModalModule.forRoot(),
+    AlertModule.forRoot()
   ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
