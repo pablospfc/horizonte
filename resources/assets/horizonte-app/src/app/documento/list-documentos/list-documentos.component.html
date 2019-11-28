@@ -59,7 +59,7 @@
           </td>
           <td>
             <button type="button"
-                    (click)="remover(documento.id)"
+                    (click)="openModalConfirm(template, documento.id)"
                     class="btn btn-danger btn-sm">
               <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
@@ -73,3 +73,28 @@
   </div>
 </section>
 
+<!--
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Confirma a exclusão deste documento?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>-->
+<ng-template #template>
+<div class="alert-box">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Confirmação</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Confirma a exclusão deste documento?
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="confirm()">Yes</button>
+    <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+  </div>
+</div>
+</ng-template>

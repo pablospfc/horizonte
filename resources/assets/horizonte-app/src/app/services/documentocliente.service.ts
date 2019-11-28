@@ -76,4 +76,13 @@ export class DocumentoclienteService {
       );
   }
 
+  public remove(id: number) {
+    return this.http.delete(`${this.api}/excluir/${id}`)
+      .pipe(
+        catchError( error => {
+          return throwError(error.error);
+        })
+      );
+  }
+
 }

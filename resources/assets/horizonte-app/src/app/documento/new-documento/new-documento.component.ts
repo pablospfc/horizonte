@@ -34,10 +34,6 @@ export class NewDocumentoComponent implements OnInit {
     console.log(this.id);
   }
 
-  hide() {
-    this.modalRef.hide();
-  }
-
   onSubmit(form: NgForm) {
     this.prepareDados(form.value);
     this.documentoService.save(this.formData)

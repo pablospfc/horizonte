@@ -14,14 +14,11 @@ export class ListDocumentosComponent implements OnInit {
 
   documentos = [];
   modalRef: BsModalRef;
+  id: number;
   constructor(private modalService: BsModalService, private documentoService: DocumentoclienteService) { }
 
   ngOnInit() {
     this.listar();
-  }
-
-  remover(id: number) {
-
   }
 
   listar() {
@@ -46,5 +43,29 @@ export class ListDocumentosComponent implements OnInit {
         id: id
       }
     });
+  }
+
+  openModalConfirm(template: TemplateRef<any>, id: number) {
+    this.id = id;
+    this.modalRef = this.modalService.show(template, {
+      class: 'modal-sm',
+      initialState: {
+        id: id
+      }
+    });
+  }
+
+  confirm(): void {
+    this.documentoService.remove(this.id)
+      .subscribe(response => {
+        console.log('Excluído com sucesso');
+      }, error => {
+        console.log('Erro ao excluir' + error);
+      });
+    this.modalRef.hide();
+  }
+
+  decline(): void {
+    this.modalRef.hide();
   }
 }

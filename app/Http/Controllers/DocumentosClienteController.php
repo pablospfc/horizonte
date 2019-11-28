@@ -129,6 +129,12 @@ class DocumentosClienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            \App\Model\DocumentosCliente::destroy($id);
+            return response()->json(['message' => 'Documento excluído com sucesso'] );
+        }catch(\Exception $e) {
+            \App\Model\Log::create(['message'=> $e->getMessage()]);
+            return response()->json(['message' => 'Ocorreu um problema ao excluir documento']);
+        }
     }
 }
