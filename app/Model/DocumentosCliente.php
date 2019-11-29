@@ -43,4 +43,9 @@ class DocumentosCliente extends Model
     public function salvar($data) {
         return self::create($data);
     }
+
+    public function atualizar($data, $id) {
+        return self::where('id', $id)
+            ->update($data);
+    }
 }

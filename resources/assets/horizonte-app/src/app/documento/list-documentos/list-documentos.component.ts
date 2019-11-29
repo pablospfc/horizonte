@@ -35,7 +35,7 @@ export class ListDocumentosComponent implements OnInit {
   downloadFile(arquivo: string) {
     this.documentoService.download(arquivo)
       .subscribe((res: any) => {
-        this.documentoService.handleFile(res, 'arquivo.pdf');
+        this.documentoService.handleFile(res, arquivo);
       });
   }
 

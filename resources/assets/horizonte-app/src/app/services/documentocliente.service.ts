@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {catchError, map} from "rxjs/operators";
 import {throwError} from "rxjs";
 import {FileUploader} from "ng2-file-upload";
+import {DocumentosCliente} from "../models/documentoscliente.model";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,15 @@ export class DocumentoclienteService {
 
   public list() {
     return this.http.get<any>(`${this.api}/listar`)
+      .pipe(
+        map(data => {
+          return data;
+        })
+      );
+  }
+
+  public getById(id) {
+    return this.http.get<DocumentosCliente>(`${this.api}/getById/${id}`)
       .pipe(
         map(data => {
           return data;
@@ -66,9 +76,35 @@ export class DocumentoclienteService {
     }, 100);
   }
 
-  public save(documentos) {
-  //  this.uploader.uploadAll();
-    return this.http.post(`${this.api}/cadastrar`, documentos)
+  public save(documento) {
+  if (documento.get('id')) {
+    return this.update(documento);
+  }else {
+    return this.create(documento);
+  }
+
+  }
+
+  private create(documento) {
+    return this.http.post(`${this.api}/cadastrar`, documento)
+      .pipe(
+        catchError(error => {
+          return throwError(error.error);
+        })
+      );
+  }
+
+  private update(documento) {
+  let headers = {
+      headers: new HttpHeaders({
+        'X-Requested-With': 'XMLHttpRequest'
+      })
+    };
+    //documento.append('_method', 'PUT');
+    documento.forEach((value,key) => {
+      console.log(key+" "+value)
+    });
+    return this.http.post(`${this.api}/atualizar/${documento.get('id')}`, documento, headers)
       .pipe(
         catchError(error => {
           return throwError(error.error);

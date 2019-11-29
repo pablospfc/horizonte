@@ -23,15 +23,16 @@ class DocumentosClienteController extends Controller
     {
         try {
             $data = $this->documentosCliente->getAll();
-            return response()->json($data,200);
-        }catch(\Exception $e) {
+            return response()->json($data, 200);
+        } catch (\Exception $e) {
             \App\Model\Log::create(['message' => $e->getMessage()]);
-            return response()->json(['message' => 'Ocorreu um problema ao listar documentos'],500 );
+            return response()->json(['message' => 'Ocorreu um problema ao listar documentos'], 500);
         }
     }
 
-    public function downloadFile($fileName) {
-        $file_path = storage_path('/app/documentos/'.$fileName);
+    public function downloadFile($fileName)
+    {
+        $file_path = storage_path('/app/documentos/' . $fileName);
         return response()->download($file_path);
     }
 
@@ -77,7 +78,7 @@ class DocumentosClienteController extends Controller
                 unset($dados['arquivo']);
                 if ($upload) {
                     $this->documentosCliente->salvar($dados);
-                    return response()->json(['message' => 'Documentos enviados com sucesso'], 200);
+                    return response()->json(['message' => 'Documento enviado com sucesso.'], 200);
                 }
             }
 
@@ -95,7 +96,13 @@ class DocumentosClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $data = \App\Model\DocumentosCliente::find($id);
+            return response()->json($data, 200);
+        } catch (\Exception $e) {
+            \App\Model\Log::create(['message' => $e->getMessage()]);
+            return response()->json(['message' => 'Ocorreu um problema ao buscar dados.']);
+        }
     }
 
     /**
@@ -118,7 +125,38 @@ class DocumentosClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $nameFile = null;
+            $dados = $request->all();
+            unset($dados['_method']);
+            error_log(var_export($dados,true));
+            // Verifica se informou o arquivo e se é válido
+            if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()) {
+
+                // Define um aleatório para o arquivo baseado no timestamps atual
+                $name = uniqid(date('HisYmd'));
+
+                // Recupera a extensão do arquivo
+                $extension = $request->arquivo->extension();
+
+                // Define finalmente o nome
+                $nameFile = "{$name}.{$extension}";
+
+                // Faz o upload:
+                $upload = $request->arquivo->storeAs('documentos', $nameFile);
+                // Se tiver funcionado o arquivo foi armazenado em storage/app/public/categories/nomedinamicoarquivo.extensao
+
+                $dados['nome_arquivo'] = $request->arquivo->getClientOriginalName();
+                $dados['md5_arquivo'] = $nameFile;
+                unset($dados['arquivo']);
+            }
+
+            $this->documentosCliente->atualizar($dados, $id);
+            return response()->json(['message' => 'Documento atualizado com sucesso.'], 200);
+        } catch (\Exception $e) {
+            \App\Model\Log::create(['message' => $e->getMessage()]);
+            return response()->json(['message' => 'Ocorreu um erro ao atualizar dados. Por favor tente novamente.'], 500);
+        }
     }
 
     /**
@@ -131,9 +169,9 @@ class DocumentosClienteController extends Controller
     {
         try {
             \App\Model\DocumentosCliente::destroy($id);
-            return response()->json(['message' => 'Documento excluído com sucesso'] );
-        }catch(\Exception $e) {
-            \App\Model\Log::create(['message'=> $e->getMessage()]);
+            return response()->json(['message' => 'Documento excluído com sucesso']);
+        } catch (\Exception $e) {
+            \App\Model\Log::create(['message' => $e->getMessage()]);
             return response()->json(['message' => 'Ocorreu um problema ao excluir documento']);
         }
     }

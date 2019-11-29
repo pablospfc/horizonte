@@ -35,6 +35,16 @@ export class NewDocumentoComponent implements OnInit {
     this.getClientes();
     this.getTiposDocumentos();
     this.getMeses();
+    if (this.id){
+      this.buscar(this.id);
+    }
+  }
+
+  buscar(id: number) {
+    this.documentoService.getById(id)
+      .subscribe(response => {
+        this.documento = response;
+      })
   }
 
   onSubmit(form: NgForm) {
@@ -82,12 +92,14 @@ export class NewDocumentoComponent implements OnInit {
 
   prepareDados(formulario) {
     //adiciona valores do formulários no objeto formData
+    console.log(formulario);
+    formulario.id ? (this.formData.append('id', formulario.id), this.formData.append('_method', 'PUT')) : null;
     formulario.id_cliente ? this.formData.append('id_cliente', formulario.id_cliente) : null;
     formulario.id_tipo_documento ? this.formData.append('id_tipo_documento', formulario.id_tipo_documento) : null;
     formulario.id_mes ? this.formData.append('id_mes', formulario.id_mes ? formulario.id_mes : null) : null;
     formulario.ano ? this.formData.append('ano', formulario.ano ? formulario.ano : null) : null;
     formulario.descricao ? this.formData.append('descricao', formulario.descricao ? formulario.descricao : null) :null;
-    this.formData.append('arquivo', this.file);
+    formulario.nome_arquivo ? this.formData.append('arquivo', this.file) : null;
   }
 
 
