@@ -14,6 +14,7 @@ import {NewDocumentoComponent} from "./documento/new-documento/new-documento.com
 import {ListFolhasPagamentoComponent} from "./documento/list-folhas-pagamento/list-folhas-pagamento.component";
 import {ListBalencetesComponent} from "./documento/list-balencetes/list-balencetes.component";
 import {ListDocumentosComponent} from "./documento/list-documentos/list-documentos.component";
+import {NewClientesComponent} from "./cliente/new-clientes/new-clientes.component";
 
 
 const routes: Routes = [
@@ -74,7 +75,11 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent
-      }
+      },
+      {
+        path: 'cadastro',
+        component: NewClientesComponent
+      },
     ]
   },
   {path: '**', redirectTo: ''}

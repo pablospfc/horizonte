@@ -148,8 +148,9 @@ class DocumentosClienteController extends Controller
 
                 $dados['nome_arquivo'] = $request->arquivo->getClientOriginalName();
                 $dados['md5_arquivo'] = $nameFile;
-                unset($dados['arquivo']);
             }
+
+            unset($dados['arquivo']);
 
             $this->documentosCliente->atualizar($dados, $id);
             return response()->json(['message' => 'Documento atualizado com sucesso.'], 200);

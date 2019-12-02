@@ -1,4 +1,4 @@
-import {Component, OnInit, EventEmitter, Input, ViewChild} from '@angular/core';
+import {Component, OnInit, EventEmitter, Input, ViewChild, Output} from '@angular/core';
 import {DocumentosCliente} from '../../models/documentoscliente.model';
 import {DocumentoclienteService} from '../../services/documentocliente.service';
 import {NgForm} from '@angular/forms';
@@ -9,6 +9,7 @@ import { FileUploader, FileLikeObject } from 'ng2-file-upload';
 import {BsModalRef} from 'ngx-bootstrap';
 import {AlertService} from "../../services/alert.service";
 import {ListDocumentosComponent} from "../list-documentos/list-documentos.component";
+import {EventEmitterService} from "../../services/event-emitter.service";
 @Component({
   selector: 'app-new-documento',
   templateUrl: './new-documento.component.html',
@@ -23,12 +24,14 @@ export class NewDocumentoComponent implements OnInit {
   public tiposDocumentos = [];
   private file: File;
   private formData = new FormData();
+  @ViewChild("ListDocumentosComponent", {static: false}) private component1: ListDocumentosComponent;
   constructor(private documentoService: DocumentoclienteService,
               private tiposDocumentosService: TiposdocumentosService,
               private clienteService: ClientesService,
               private mesesService: MesesService,
               private modalRef: BsModalRef,
-              private alertService: AlertService) { }
+              private alertService: AlertService,
+              private eventEmitterService: EventEmitterService ) { }
 
   ngOnInit() {
     this.documento = new DocumentosCliente();
@@ -92,14 +95,13 @@ export class NewDocumentoComponent implements OnInit {
 
   prepareDados(formulario) {
     //adiciona valores do formulários no objeto formData
-    console.log(formulario);
-    formulario.id ? (this.formData.append('id', formulario.id), this.formData.append('_method', 'PUT')) : null;
+    formulario.id ? this.formData.append('id', formulario.id) : null;
     formulario.id_cliente ? this.formData.append('id_cliente', formulario.id_cliente) : null;
     formulario.id_tipo_documento ? this.formData.append('id_tipo_documento', formulario.id_tipo_documento) : null;
     formulario.id_mes ? this.formData.append('id_mes', formulario.id_mes ? formulario.id_mes : null) : null;
     formulario.ano ? this.formData.append('ano', formulario.ano ? formulario.ano : null) : null;
     formulario.descricao ? this.formData.append('descricao', formulario.descricao ? formulario.descricao : null) :null;
-    formulario.nome_arquivo ? this.formData.append('arquivo', this.file) : null;
+     this.formData.append('arquivo', this.file);
   }
 
 

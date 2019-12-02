@@ -95,16 +95,11 @@ export class DocumentoclienteService {
   }
 
   private update(documento) {
-  let headers = {
-      headers: new HttpHeaders({
-        'X-Requested-With': 'XMLHttpRequest'
-      })
-    };
     //documento.append('_method', 'PUT');
     documento.forEach((value,key) => {
       console.log(key+" "+value)
     });
-    return this.http.post(`${this.api}/atualizar/${documento.get('id')}`, documento, headers)
+    return this.http.post(`${this.api}/atualizar/${documento.get('id')}`, documento)
       .pipe(
         catchError(error => {
           return throwError(error.error);

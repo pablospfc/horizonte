@@ -5,6 +5,7 @@ import {DocumentosCliente} from "../../models/documentoscliente.model";
 import {DocumentoclienteService} from "../../services/documentocliente.service";
 import {initialState} from "ngx-bootstrap/timepicker/reducer/timepicker.reducer";
 import {AlertService} from "../../services/alert.service";
+import {EventEmitterService} from "../../services/event-emitter.service";
 
 @Component({
   selector: 'app-list-documentos',
@@ -17,14 +18,27 @@ export class ListDocumentosComponent implements OnInit {
   id: number;
   constructor(private modalService: BsModalService,
               private documentoService: DocumentoclienteService,
-              private alertService: AlertService) { }
+              private alertService: AlertService,
+              private eventEmitterService: EventEmitterService  ) { }
 
   ngOnInit() {
+    /*console.log("chegou aqui construtor");
+    if (this.eventEmitterService.subsVar==undefined) {
+      console.log("chegou aqui dentro");
+      this.eventEmitterService.subsVar = this.eventEmitterService.
+      invokeFirstComponentFunction.subscribe((name:string) => {
+        this.listar();
+      });
+    }
+    */
+
     this.listar();
+
+
   }
 
-  listar() {
-     this.documentoService.list()
+  public listar() {
+    this.documentoService.list()
       .subscribe(response => {
         this.documentos = response;
       },error => {
