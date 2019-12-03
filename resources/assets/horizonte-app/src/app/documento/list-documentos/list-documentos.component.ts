@@ -5,6 +5,7 @@ import {DocumentosCliente} from "../../models/documentoscliente.model";
 import {DocumentoclienteService} from "../../services/documentocliente.service";
 import {initialState} from "ngx-bootstrap/timepicker/reducer/timepicker.reducer";
 import {AlertService} from "../../services/alert.service";
+
 //import {EventEmitterService} from "../../services/event-emitter.service";
 
 @Component({
@@ -16,36 +17,27 @@ export class ListDocumentosComponent implements OnInit {
   documentos = [];
   modalRef: BsModalRef;
   id: number;
+
   constructor(private modalService: BsModalService,
               private documentoService: DocumentoclienteService,
-              private alertService: AlertService,
-              /*private eventEmitterService: EventEmitterService*/  ) { }
-
-  ngOnInit() {
-    /*console.log("chegou aqui construtor");
-    if (this.eventEmitterService.subsVar==undefined) {
-      console.log("chegou aqui dentro");
-      this.eventEmitterService.subsVar = this.eventEmitterService.
-      invokeFirstComponentFunction.subscribe((name:string) => {
-        this.listar();
-      });
-    }
-    */
-
-    this.listar();
-
-
+              private alertService: AlertService) {
   }
 
+  ngOnInit() {
+    this.listar();
+  }
+
+  //list the all documents
   public listar() {
     this.documentoService.list()
       .subscribe(response => {
         this.documentos = response;
-      },error => {
+      }, error => {
 
       });
   }
 
+  //download attached file
   downloadFile(arquivo: string) {
     this.documentoService.download(arquivo)
       .subscribe((res: any) => {
@@ -54,13 +46,20 @@ export class ListDocumentosComponent implements OnInit {
   }
 
   openModalUpload(id: number = null) {
+    //Open the modal by passing the id, if exists
     this.modalRef = this.modalService.show(NewDocumentoComponent, {
       initialState: {
         id: id
       }
     });
+
+    //Update the table information after close the modal.
+    this.modalService.onHide.subscribe((reason: string) => {
+      this.listar();
+    })
   }
 
+  //Open the confirmation modal before to remove document.
   openModalConfirm(template: TemplateRef<any>, id: number) {
     this.id = id;
     this.modalRef = this.modalService.show(template, {
@@ -71,6 +70,7 @@ export class ListDocumentosComponent implements OnInit {
     });
   }
 
+  //remove the document
   confirm(): void {
     this.documentoService.remove(this.id)
       .subscribe(response => {
@@ -84,6 +84,7 @@ export class ListDocumentosComponent implements OnInit {
     this.listar();
   }
 
+  //reject the document removal
   decline(): void {
     this.modalRef.hide();
   }

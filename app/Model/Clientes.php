@@ -4,6 +4,7 @@
 namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class Clientes extends Model
 {
@@ -33,8 +34,19 @@ class Clientes extends Model
 
     public function salvar($dados) {
         DB::transaction(function () use ($dados) {
-            self::create($dados);
-
+            $idCliente = self::create([
+                'razao_social' => $dados['razao_social'],
+                'responsavel'  => $dados['responsavel'],
+                'cnpj'         => $dados['cnpj'],
+                'telefone'     => $dados['telefone']
+            ])->id;
+            return User::create([
+               'id_perfil'  => 3,
+               'id_cliente' => $idCliente,
+               'nome'       => $dados['responsavel'],
+               'login'      => $dados['cnpj'],
+               'senha'      => Hash::make($dados['senha'])
+            ]);
 
         });
     }

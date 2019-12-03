@@ -20,6 +20,9 @@ import {AlertModule} from "ngx-bootstrap";
 
 @NgModule({
   declarations: [NewDocumentoComponent, ListDocumentosComponent, ListFaturamentosComponent, ListBalencetesComponent, ListBoletosComponent, ListDeclaracoesComponent, ListContratosComponent, ListCertidoesComponent, ListFolhasPagamentoComponent, AlertMessageComponent],
+  exports: [
+    AlertMessageComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,

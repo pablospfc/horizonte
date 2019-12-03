@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ClientesService} from "../../services/clientes.service";
 import {NgForm} from "@angular/forms";
 import {AlertService} from "../../services/alert.service";
+import {Clientes} from "../../models/clientes.model";
 
 @Component({
   selector: 'app-new-clientes',
@@ -10,10 +11,12 @@ import {AlertService} from "../../services/alert.service";
 })
 export class NewClientesComponent implements OnInit {
 
+  cliente: Clientes;
   constructor(private clientesService: ClientesService, private alertService: AlertService) {
   }
 
   ngOnInit() {
+    this.cliente = new Clientes();
   }
 
   onSubmit(form: NgForm) {

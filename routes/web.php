@@ -15,6 +15,7 @@ Route::get('/', function () {
     return view('app');
 });
 
+Route::post('clientes/cadastrar',"ClientesController@store");
 Route::get('clientes/listar',"ClientesController@index");
 Route::get('clientes/listarAprovados',"ClientesController@listarAprovados");
 Route::put('clientes/avaliar/{id}',"ClientesController@avaliar");
@@ -22,6 +23,7 @@ Route::post('documentoscliente/cadastrar',"DocumentosClienteController@store");
 Route::post('documentoscliente/atualizar/{id}',"DocumentosClienteController@update");
 Route::get('documentoscliente/listar',"DocumentosClienteController@index");
 Route::get('documentoscliente/getById/{id}',"DocumentosClienteController@show");
+Route::get('documentoscliente/getByTipo/{id}',"DocumentosClienteController@getByTipo");
 Route::delete('documentoscliente/excluir/{id}',"DocumentosClienteController@destroy");
 Route::get('documentoscliente/download/{file}',"DocumentosClienteController@downloadFile");
 

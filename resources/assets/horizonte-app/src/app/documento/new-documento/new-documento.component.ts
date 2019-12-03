@@ -5,10 +5,11 @@ import {NgForm} from '@angular/forms';
 import {ClientesService} from '../../services/clientes.service';
 import {TiposdocumentosService} from '../../services/tiposdocumentos.service';
 import {MesesService} from '../../services/meses.service';
-import { FileUploader, FileLikeObject } from 'ng2-file-upload';
+import {FileUploader, FileLikeObject} from 'ng2-file-upload';
 import {BsModalRef} from 'ngx-bootstrap';
 import {AlertService} from "../../services/alert.service";
 import {ListDocumentosComponent} from "../list-documentos/list-documentos.component";
+
 //import {EventEmitterService} from "../../services/event-emitter.service";
 @Component({
   selector: 'app-new-documento',
@@ -16,7 +17,7 @@ import {ListDocumentosComponent} from "../list-documentos/list-documentos.compon
   styleUrls: ['./new-documento.component.scss']
 })
 export class NewDocumentoComponent implements OnInit {
-@Input() id: number;
+  @Input() id: number;
 
   documento: DocumentosCliente;
   meses = [];
@@ -24,25 +25,26 @@ export class NewDocumentoComponent implements OnInit {
   public tiposDocumentos = [];
   private file: File;
   private formData = new FormData();
-  //@ViewChild("ListDocumentosComponent", {static: false}) private component1: ListDocumentosComponent;
+
   constructor(private documentoService: DocumentoclienteService,
               private tiposDocumentosService: TiposdocumentosService,
               private clienteService: ClientesService,
               private mesesService: MesesService,
               private modalRef: BsModalRef,
-              private alertService: AlertService,
-              /*private eventEmitterService: EventEmitterService*/ ) { }
+              private alertService: AlertService) {
+  }
 
   ngOnInit() {
     this.documento = new DocumentosCliente();
     this.getClientes();
     this.getTiposDocumentos();
     this.getMeses();
-    if (this.id){
+    if (this.id) {
       this.buscar(this.id);
     }
   }
 
+  //get data by id
   buscar(id: number) {
     this.documentoService.getById(id)
       .subscribe(response => {
@@ -50,6 +52,7 @@ export class NewDocumentoComponent implements OnInit {
       })
   }
 
+  //submit form data to backend
   onSubmit(form: NgForm) {
     this.prepareDados(form.value);
     this.documentoService.save(this.formData)
@@ -62,19 +65,22 @@ export class NewDocumentoComponent implements OnInit {
       });
   }
 
+  //get file in the form
   inputFileChange(event) {
     if (event.target.files && event.target.files[0]) {
       this.file = event.target.files[0];
     }
   }
 
+  //get data to show in the select box
   getClientes() {
-  this. clienteService.listApproved()
-    .subscribe( response => {
-      this.clientes = response;
-    });
+    this.clienteService.listApproved()
+      .subscribe(response => {
+        this.clientes = response;
+      });
   }
 
+  //get data to show in the select box
   getTiposDocumentos() {
     this.tiposDocumentosService.list()
       .subscribe(response => {
@@ -82,6 +88,7 @@ export class NewDocumentoComponent implements OnInit {
       });
   }
 
+  //get data to show in the select box
   getMeses() {
     this.mesesService.list()
       .subscribe(response => {
@@ -89,19 +96,20 @@ export class NewDocumentoComponent implements OnInit {
       });
   }
 
-  close(){
+  //close the modal
+  close() {
     this.modalRef.hide();
   }
 
+  //add form values inside formData object
   prepareDados(formulario) {
-    //adiciona valores do formulários no objeto formData
     formulario.id ? this.formData.append('id', formulario.id) : null;
     formulario.id_cliente ? this.formData.append('id_cliente', formulario.id_cliente) : null;
     formulario.id_tipo_documento ? this.formData.append('id_tipo_documento', formulario.id_tipo_documento) : null;
     formulario.id_mes ? this.formData.append('id_mes', formulario.id_mes ? formulario.id_mes : null) : null;
     formulario.ano ? this.formData.append('ano', formulario.ano ? formulario.ano : null) : null;
-    formulario.descricao ? this.formData.append('descricao', formulario.descricao ? formulario.descricao : null) :null;
-     this.formData.append('arquivo', this.file);
+    formulario.descricao ? this.formData.append('descricao', formulario.descricao ? formulario.descricao : null) : null;
+    this.formData.append('arquivo', this.file);
   }
 
 
