@@ -9,7 +9,7 @@ import { FileUploader, FileLikeObject } from 'ng2-file-upload';
 import {BsModalRef} from 'ngx-bootstrap';
 import {AlertService} from "../../services/alert.service";
 import {ListDocumentosComponent} from "../list-documentos/list-documentos.component";
-import {EventEmitterService} from "../../services/event-emitter.service";
+//import {EventEmitterService} from "../../services/event-emitter.service";
 @Component({
   selector: 'app-new-documento',
   templateUrl: './new-documento.component.html',
@@ -24,14 +24,14 @@ export class NewDocumentoComponent implements OnInit {
   public tiposDocumentos = [];
   private file: File;
   private formData = new FormData();
-  @ViewChild("ListDocumentosComponent", {static: false}) private component1: ListDocumentosComponent;
+  //@ViewChild("ListDocumentosComponent", {static: false}) private component1: ListDocumentosComponent;
   constructor(private documentoService: DocumentoclienteService,
               private tiposDocumentosService: TiposdocumentosService,
               private clienteService: ClientesService,
               private mesesService: MesesService,
               private modalRef: BsModalRef,
               private alertService: AlertService,
-              private eventEmitterService: EventEmitterService ) { }
+              /*private eventEmitterService: EventEmitterService*/ ) { }
 
   ngOnInit() {
     this.documento = new DocumentosCliente();

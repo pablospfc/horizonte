@@ -22,6 +22,15 @@ export class ClientesService {
       );
   }
 
+  public save(cliente) {
+    return this.http.post(`${this.api}/cadastrar`, cliente)
+      .pipe(
+        catchError(error => {
+        return throwError(error.error);
+      })
+      );
+  }
+
   public listApproved() {
     return this.http.get<Clientes[]>(`${this.api}/listarAprovados`)
       .pipe(

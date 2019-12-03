@@ -3,6 +3,7 @@
 
 namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Clientes extends Model
 {
@@ -28,6 +29,14 @@ class Clientes extends Model
             ->orderBy("cl.responsavel")
             ->get()
             ->toArray();
+    }
+
+    public function salvar($dados) {
+        DB::transaction(function () use ($dados) {
+            self::create($dados);
+
+
+        });
     }
 
 }

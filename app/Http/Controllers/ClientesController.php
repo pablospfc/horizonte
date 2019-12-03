@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\Clientes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientesController extends Controller
 {
@@ -78,7 +79,13 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $this->clientes->salvar($request->all());
+            return response()->json(['message' => 'O seu cadastro foi realizado com sucesso. Aguarde a aprovação do Horizonte Contabilidade.'],200);
+        }catch(\Exception $e) {
+            \App\Model\Log::create(['message' => $e->getMessage()]);
+            return response()->json(['message' => 'Ocorreu um problema ao realizar seu cadastro. Tente novamente.']);
+        }
     }
 
     /**
