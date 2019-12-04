@@ -4,10 +4,10 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="../assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>{{auth.getUser().name}}</p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -30,37 +30,37 @@
             <i class="fa fa-dashboard"></i> <span>Home</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="auth.getUser().id_perfil != 3">
           <a href="#" [routerLink]="['/list-clientes']" >
             <i class="fa fa-users"></i> <span>Clientes</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="auth.getUser().id_perfil != 3">
           <a href="#" [routerLink]="['/list-documentos']" >
             <i class="fa fa-upload"></i> <span>Upload de Arquivos</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="auth.getUser().id_perfil != 2">
           <a href="#" [routerLink]="['/list-folhas-pagamento']" >
             <i class="fa fa-list"></i> <span>Folha de Pagamento</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="auth.getUser().id_perfil != 2">
           <a href="#" [routerLink]="['/list-faturamentos']" >
             <i class="fa fa-money"></i> <span>Faturamento</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="auth.getUser().id_perfil != 2">
           <a href="#" [routerLink]="['/list-balancetes']" >
             <i class="fa fa-line-chart"></i> <span>Balancetes</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="auth.getUser().id_perfil != 2">
         <a href="#" [routerLink]="['/list-boletos']" >
           <i class="fa fa-barcode"></i> <span>Boletos</span>
         </a>
-      </li>
-        <li class="treeview">
+       </li>
+        <li class="treeview" *ngIf="auth.getUser().id_perfil != 2">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Documentos</span>

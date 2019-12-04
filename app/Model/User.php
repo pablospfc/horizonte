@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
     //use Notifiable;
 
@@ -15,18 +15,18 @@ class User extends Model
      *
      * @var array
      */
+    /*
     protected $table = "users";
     protected $primaryKey = "id";
     public $incrementing = true;
     public $timestamps = true;
-
+*/
     protected $fillable = [
         'id_perfil',
         'id_cliente',
-        'nome',
+        'name',
         "login",
-        "senha",
-        "email"
+        "password"
     ];
 
     /**
@@ -35,7 +35,7 @@ class User extends Model
      * @var array
      */
     protected $hidden = [
-        'senha', 'remember_token',
+        'password', 'remember_token',
     ];
 
 }

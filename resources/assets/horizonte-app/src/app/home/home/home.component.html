@@ -15,89 +15,116 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>150</h3>
-
           <p>Clientes</p>
         </div>
         <div class="icon">
-          <i class="ion ion-bag"></i>
+          <i class="ion ion-person"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="#" [routerLink]="['/list-clientes']" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-xs-6" *ngIf="auth.getUser().id_perfil == 2">
       <!-- small box -->
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>53<sup style="font-size: 20px">%</sup></h3>
-
           <p>Documentos</p>
         </div>
         <div class="icon">
-          <i class="ion ion-stats-bars"></i>
+          <i class="ion ion-document"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="#" [routerLink]="['/list-documentos']" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-xs-6" *ngIf="auth.getUser().id_perfil == 2">
       <!-- small box -->
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>44</h3>
-
           <p>Folhas de Pagamento</p>
         </div>
         <div class="icon">
-          <i class="ion ion-person-add"></i>
+          <i class="ion ion-document"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="#" class="small-box-footer">Detathes <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-xs-6" *ngIf="auth.getUser().id_perfil == 2">
       <!-- small box -->
       <div class="small-box bg-red">
         <div class="inner">
-          <h3>65</h3>
-
-          <p>Unique Visitors</p>
+          <p>Parte Contratual</p>
         </div>
         <div class="icon">
-          <i class="ion ion-pie-graph"></i>
+          <i class="ion ion-document"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="#" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
 
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-xs-6" *ngIf="auth.getUser().id_perfil == 2">
       <!-- small box -->
       <div class="small-box bg-red">
         <div class="inner">
-          <h3>65</h3>
-
-          <p>Unique Visitors</p>
+          <p>Impostos sobre Faturamento</p>
         </div>
         <div class="icon">
-          <i class="ion ion-pie-graph"></i>
+          <i class="ion ion-document"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="#" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
 
-    <div class="col-lg-3 col-xs-6">
+    <div class="col-lg-3 col-xs-6" *ngIf="auth.getUser().id_perfil == 2">
       <!-- small box -->
       <div class="small-box bg-red">
         <div class="inner">
-          <h3>65</h3>
-
-          <p>Unique Visitors</p>
+          <p>Boletos</p>
         </div>
         <div class="icon">
-          <i class="ion ion-pie-graph"></i>
+          <i class="ion ion-document"></i>
         </div>
-        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+        <a href="#" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6" *ngIf="auth.getUser().id_perfil == 2">
+      <!-- small box -->
+      <div class="small-box bg-red">
+        <div class="inner">
+          <p>Certidões</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-document"></i>
+        </div>
+        <a href="#" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6" *ngIf="auth.getUser().id_perfil == 2">
+      <!-- small box -->
+      <div class="small-box bg-red">
+        <div class="inner">
+          <p>Balanços</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-document"></i>
+        </div>
+        <a href="#" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6" *ngIf="auth.getUser().id_perfil == 2">
+      <!-- small box -->
+      <div class="small-box bg-red">
+        <div class="inner">
+          <p>Declarações</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-document"></i>
+        </div>
+        <a href="#" class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->

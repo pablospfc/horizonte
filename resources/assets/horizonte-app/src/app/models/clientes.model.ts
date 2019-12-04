@@ -4,6 +4,6 @@ export class Clientes {
   responsavel: string;
   cnpj: string;
   telefone: string;
-  senha: string;
+  password: string;
   confirma_senha: string;
 }

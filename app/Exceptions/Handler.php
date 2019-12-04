@@ -62,7 +62,7 @@ class Handler extends ExceptionHandler
             return $this->convertValidationExceptionToResponse($exception, $request);
         }
 
-        /*
+
         if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException) {
             return response()->json(['token_expired'], $exception->getStatusCode());
         } else if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
@@ -73,7 +73,7 @@ class Handler extends ExceptionHandler
         else if ($exception instanceof \Tymon\JWTAuth\Exceptions\TokenBlacklistedException){
             return response()->json(['error' => 'token_has_been_blacklisted'], $exception->getStatusCode());
         }
-*/
+
         $response = [];
 
         $statusCode = 500;

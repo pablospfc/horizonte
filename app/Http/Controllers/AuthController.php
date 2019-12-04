@@ -15,9 +15,13 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request->only('login', 'senha');
+
+        $credentials = $request->only('login', 'password');
+
         // attempt to verify the credentials and create a token for the user
         if (! $token = $this->jwtAuth->attempt($credentials)) {
+            //$user = $this->jwtAuth->authenticate($token);
+
             return response()->json(['error' => 'invalid_credentials'], 401);
         }
 
@@ -30,7 +34,7 @@ class AuthController extends Controller
         $token = $this->jwtAuth->getToken();
         $token = $this->jwtAuth->refresh($token);
 
-        return $this->response()->json(compact('token'));
+        return response()->json(compact('token'));
     }
 
     public function logout() {

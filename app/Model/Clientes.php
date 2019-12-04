@@ -43,9 +43,9 @@ class Clientes extends Model
             return User::create([
                'id_perfil'  => 3,
                'id_cliente' => $idCliente,
-               'nome'       => $dados['responsavel'],
+               'name'       => $dados['responsavel'],
                'login'      => $dados['cnpj'],
-               'senha'      => Hash::make($dados['senha'])
+               'password'      => bcrypt($dados['password'])
             ]);
 
         });

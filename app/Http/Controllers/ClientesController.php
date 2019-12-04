@@ -84,7 +84,7 @@ class ClientesController extends Controller
             return response()->json(['message' => 'O seu cadastro foi realizado com sucesso. Aguarde a aprovação do Horizonte Contabilidade.'],200);
         }catch(\Exception $e) {
             \App\Model\Log::create(['message' => $e->getMessage()]);
-            return response()->json(['message' => 'Ocorreu um problema ao realizar seu cadastro. Tente novamente.']);
+            return response()->json(['message' => 'Ocorreu um problema ao realizar seu cadastro. Tente novamente.'],500);
         }
     }
 

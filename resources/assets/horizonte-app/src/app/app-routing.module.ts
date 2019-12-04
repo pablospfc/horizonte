@@ -15,12 +15,15 @@ import {ListFolhasPagamentoComponent} from "./documento/list-folhas-pagamento/li
 import {ListBalencetesComponent} from "./documento/list-balencetes/list-balencetes.component";
 import {ListDocumentosComponent} from "./documento/list-documentos/list-documentos.component";
 import {NewClientesComponent} from "./cliente/new-clientes/new-clientes.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 
 const routes: Routes = [
   {
   path: '',
     component: DashboardTemplateComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     children: [
       {
         path: '',
