@@ -40,7 +40,7 @@
             <select class="form-control"
                     id="id_mes"
                     [(ngModel)]="documento.id_mes"
-                    [required]="false"
+                    [required]="documento.id_tipo_documento != 1 || documento.id_tipo_documento != 7 || documento.id_tipo_documento != 8 || documento.id_tipo_documento != 6"
                     name="id_mes">
               <option *ngFor="let mes of meses" [value]="mes.id">{{mes.nome}}</option>
             </select>
@@ -53,7 +53,7 @@
                    id="ano"
                    name="ano"
                    [(ngModel)]="documento.ano"
-                   [required]="false"
+                   [required]="documento.id_tipo_documento != 1"
                    placeholder="Ano"/>
           </div>
 
@@ -72,6 +72,7 @@
             <label for="arquivo">Arquivo</label>
             <input type="file" id="arquivo"
                    (change)="inputFileChange($event)"
+                   [required]="!documento.id"
                    name="arquivo"/>
           </div>
         </div>

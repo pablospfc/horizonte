@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {catchError, map} from "rxjs/operators";
@@ -14,11 +14,13 @@ export class DocumentoclienteService {
   private readonly api = `${environment.API}/documentoscliente`;
   private headers = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
       'Accept': 'multipart/form-data'
     })
   };
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) {
+  }
 
   public list() {
     return this.http.get<any>(`${this.api}/listar`)
@@ -31,6 +33,15 @@ export class DocumentoclienteService {
 
   public getById(id) {
     return this.http.get<DocumentosCliente>(`${this.api}/getById/${id}`)
+      .pipe(
+        map(data => {
+          return data;
+        })
+      );
+  }
+
+  public getByTipo(id) {
+    return this.http.get<DocumentosCliente[]>(`${this.api}/getByTipo/${id}`)
       .pipe(
         map(data => {
           return data;
@@ -77,11 +88,11 @@ export class DocumentoclienteService {
   }
 
   public save(documento) {
-  if (documento.get('id')) {
-    return this.update(documento);
-  }else {
-    return this.create(documento);
-  }
+    if (documento.get('id')) {
+      return this.update(documento);
+    } else {
+      return this.create(documento);
+    }
 
   }
 
@@ -95,10 +106,11 @@ export class DocumentoclienteService {
   }
 
   private update(documento) {
-    //documento.append('_method', 'PUT');
+    /*
     documento.forEach((value,key) => {
       console.log(key+" "+value)
     });
+    */
     return this.http.post(`${this.api}/atualizar/${documento.get('id')}`, documento)
       .pipe(
         catchError(error => {
@@ -110,7 +122,7 @@ export class DocumentoclienteService {
   public remove(id: number) {
     return this.http.delete(`${this.api}/excluir/${id}`)
       .pipe(
-        catchError( error => {
+        catchError(error => {
           return throwError(error.error);
         })
       );

@@ -1,4 +1,8 @@
 <!--<div *ngIf="message" [dismissOnTimeout]="alert.timeout" [ngClass]="message.cssClass">{{message.text}}</div>-->
 
-<alert *ngIf="message" [type]="message.type" [dismissOnTimeout]="message.timeout" >{{ message.text }}</alert>
-
+<!--<alert *ngIf="message" [type]="message.type" [dismissible]="message.dismissible" >{{ message.text }}</alert>-->
+<div *ngIf="alerts">
+   <div *ngFor="let alert of alerts">
+  <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.text }}</alert>
+   </div>
+</div>

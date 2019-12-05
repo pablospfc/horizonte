@@ -6,6 +6,7 @@ import {RouterModule} from "@angular/router";
 import {DataTablesModule} from "angular-datatables";
 import {FormsModule} from "@angular/forms";
 import {DocumentoModule} from "../documento/documento.module";
+import {CpfCnpjModule} from "ng2-cpf-cnpj";
 
 
 
@@ -16,7 +17,8 @@ import {DocumentoModule} from "../documento/documento.module";
     RouterModule,
     DataTablesModule,
     FormsModule,
-    DocumentoModule
+    DocumentoModule,
+    CpfCnpjModule
   ]
 })
 export class ClienteModule { }

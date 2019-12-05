@@ -22,6 +22,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {RefreshTokenInterceptor} from "./interceptors/refresh-token.interceptor";
 import {AplicationErrorHandle} from "./app.error-handle";
+import {CpfCnpjModule} from "ng2-cpf-cnpj";
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import {AplicationErrorHandle} from "./app.error-handle";
     DocumentoModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
+    CpfCnpjModule,
     FormsModule
   ],
   providers: [ AuthGuard,

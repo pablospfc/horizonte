@@ -29,8 +29,11 @@
                class="form-control"
                [(ngModel)]="cliente.cnpj"
                name="cnpj"
-               placeholder="CNPJ">
+               [cnpj]="cliente.cnpj"
+               #cnpjInput="ngModel"
+               placeholder="CNPJ"/>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <div *ngIf="cnpjInput?.errors?.cnpj">CNPJ inválido</div>
       </div>
       <div class="form-group has-feedback">
         <input type="text"
@@ -64,7 +67,7 @@
         </div>
 
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Cadastrar</button>
+          <button type="submit" [disabled]="!formCadastro.valid" class="btn btn-primary btn-block btn-flat">Cadastrar</button>
         </div>
 
       </div>

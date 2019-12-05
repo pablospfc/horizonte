@@ -19,6 +19,7 @@ export class AlertService {
     this.subject.next( {
       type: 'success',
       text: message,
+      dismissible: true,
       timeout: 5000
     });
   }
@@ -27,6 +28,7 @@ export class AlertService {
     this.subject.next( {
       type: 'danger',
       text: message,
+      dismissible: true,
       timeout: 5000
     });
   }
