@@ -26,7 +26,7 @@ Route::post('documentoscliente/cadastrar',"DocumentosClienteController@store");
 Route::post('documentoscliente/atualizar/{id}',"DocumentosClienteController@update");
 Route::get('documentoscliente/listar',"DocumentosClienteController@index");
 Route::get('documentoscliente/getById/{id}',"DocumentosClienteController@show");
-Route::get('documentoscliente/getByTipo/{id}',"DocumentosClienteController@getByTipo");
+Route::get('documentoscliente/getByTipo/{id}/{user}',"DocumentosClienteController@getByTipo");
 Route::delete('documentoscliente/excluir/{id}',"DocumentosClienteController@destroy");
 Route::get('documentoscliente/download/{file}',"DocumentosClienteController@downloadFile");
 

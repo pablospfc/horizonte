@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Tymon\JWTAuth\JWTAuth;
 use App\Model\DocumentosCliente;
 use Illuminate\Http\Request;
 
@@ -13,10 +13,12 @@ class DocumentosClienteController extends Controller
      * @return \Illuminate\Http\Response
      */
     private $documentosCliente;
+    private $jwtAuth;
 
-    function __construct()
+    function __construct( JWTAuth $jwtAuth)
     {
         $this->documentosCliente = new DocumentosCliente();
+        $this->jwtAuth = $jwtAuth;
     }
 
     public function index()
@@ -34,6 +36,17 @@ class DocumentosClienteController extends Controller
     {
         $file_path = storage_path('/app/documentos/' . $fileName);
         return response()->download($file_path);
+    }
+
+    public function getByTipo($id, $userLogged) {
+        try {
+            $dados = $this->documentosCliente->getById($id, $userLogged);
+            return response()->json($dados, 200);
+        }catch(\Exception $e) {
+            \App\Model\Log::create(['message' => $e]);
+            return response()->json(['message' => 'Não foi possível localizar dados. Por vavor tente novamente'], 500);
+        }
+
     }
 
     /**

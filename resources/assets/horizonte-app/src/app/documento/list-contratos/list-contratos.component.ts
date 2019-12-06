@@ -16,7 +16,7 @@ export class ListContratosComponent implements OnInit {
   }
 
   list() {
-    this.service.getByTipo(3)
+    this.service.getByTipo(1)
       .subscribe(response => {
         this.documentos = response;
       });
