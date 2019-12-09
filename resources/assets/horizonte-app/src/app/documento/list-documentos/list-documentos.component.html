@@ -65,6 +65,13 @@
             </button>
           </td>
         </tr>
+        <tr class="animate-repeat" *ngIf="documentos.length == 0">
+          <td colspan="8" class="text-center">
+            <em>
+              Nenhum resultado foi encontrado
+            </em>
+          </td>
+        </tr>
         </tbody>
       </table>
     </div>

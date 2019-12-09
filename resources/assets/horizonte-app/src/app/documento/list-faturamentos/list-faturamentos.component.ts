@@ -17,7 +17,7 @@ export class ListFaturamentosComponent implements OnInit {
   }
 
   list() {
-    this.documentoService.getByTipo(3, this.auth.getUser().id)
+    this.documentoService.getByTipo(2, this.auth.getUser().id)
       .subscribe(response => {
         this.documentos = response;
       });

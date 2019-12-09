@@ -63,15 +63,14 @@
         <li class="treeview" *ngIf="auth.getUser().id_perfil != 2">
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Documentos</span>
+            <span>Outros Documentos</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="#" [routerLink]="['/list-declaracoes']"><i class="fa fa-circle-o"></i> Declarações</a></li>
-            <li><a href="#" [routerLink]="['/list-contratos']"><i class="fa fa-circle-o"></i> Contratos</a></li>
-            <li><a href="#" [routerLink]="['/list-certidoes']"><i class="fa fa-circle-o"></i> Certidões Negativas</a></li>
+            <li><a href="#" [routerLink]="['/list-contratos']"><i class="fa fa-circle-o"></i> Parte Contratual</a></li>
           </ul>
         </li>
       </ul>
