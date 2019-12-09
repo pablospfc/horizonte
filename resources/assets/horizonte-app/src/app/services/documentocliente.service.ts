@@ -40,8 +40,8 @@ export class DocumentoclienteService {
       );
   }
 
-  public getByTipo(id) {
-    return this.http.get<DocumentosCliente[]>(`${this.api}/getByTipo/${id}`)
+  public getByTipo(id, user) {
+    return this.http.get<DocumentosCliente[]>(`${this.api}/getByTipo/${id}/${user}`)
       .pipe(
         map(data => {
           return data;

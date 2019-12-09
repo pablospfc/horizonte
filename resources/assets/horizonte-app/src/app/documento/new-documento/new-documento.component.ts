@@ -7,10 +7,10 @@ import {TiposdocumentosService} from '../../services/tiposdocumentos.service';
 import {MesesService} from '../../services/meses.service';
 import {FileUploader, FileLikeObject} from 'ng2-file-upload';
 import {BsModalRef} from 'ngx-bootstrap';
-import {AlertService} from "../../services/alert.service";
-import {ListDocumentosComponent} from "../list-documentos/list-documentos.component";
+import {AlertService} from '../../services/alert.service';
+import {ListDocumentosComponent} from '../list-documentos/list-documentos.component';
 
-//import {EventEmitterService} from "../../services/event-emitter.service";
+// import {EventEmitterService} from "../../services/event-emitter.service";
 @Component({
   selector: 'app-new-documento',
   templateUrl: './new-documento.component.html',
@@ -44,15 +44,15 @@ export class NewDocumentoComponent implements OnInit {
     }
   }
 
-  //get data by id
+  // get data by id
   buscar(id: number) {
     this.documentoService.getById(id)
       .subscribe(response => {
         this.documento = response;
-      })
+      });
   }
 
-  //submit form data to backend
+  // submit form data to backend
   onSubmit(form: NgForm) {
     this.prepareDados(form.value);
     this.documentoService.save(this.formData)
@@ -65,14 +65,14 @@ export class NewDocumentoComponent implements OnInit {
       });
   }
 
-  //get file in the form
+  // get file in the form
   inputFileChange(event) {
     if (event.target.files && event.target.files[0]) {
       this.file = event.target.files[0];
     }
   }
 
-  //get data to show in the select box
+  // get data to show in the select box
   getClientes() {
     this.clienteService.listApproved()
       .subscribe(response => {
@@ -80,7 +80,7 @@ export class NewDocumentoComponent implements OnInit {
       });
   }
 
-  //get data to show in the select box
+  // get data to show in the select box
   getTiposDocumentos() {
     this.tiposDocumentosService.list()
       .subscribe(response => {
@@ -88,7 +88,7 @@ export class NewDocumentoComponent implements OnInit {
       });
   }
 
-  //get data to show in the select box
+  // get data to show in the select box
   getMeses() {
     this.mesesService.list()
       .subscribe(response => {
@@ -96,12 +96,12 @@ export class NewDocumentoComponent implements OnInit {
       });
   }
 
-  //close the modal
+  // close the modal
   close() {
     this.modalRef.hide();
   }
 
-  //add form values inside formData object
+  // add form values inside formData object
   prepareDados(formulario) {
     formulario.id ? this.formData.append('id', formulario.id) : null;
     formulario.id_cliente ? this.formData.append('id_cliente', formulario.id_cliente) : null;
