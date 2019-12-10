@@ -51,4 +51,16 @@ class Clientes extends Model
         });
     }
 
+    public function checkCNPJ($cnpj) {
+        $data = self::where('cnpj', $cnpj)
+            ->get()
+            ->toArray();
+         error_log(var_export($data,true));
+        if (!empty($data) && is_array($data)){
+            return false; //allow
+        }
+
+        return true; //decline
+    }
+
 }

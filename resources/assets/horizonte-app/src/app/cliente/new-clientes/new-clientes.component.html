@@ -1,11 +1,11 @@
 
-<div class="register-box">
+<div class="register-box" style="height:600px;">
   <div class="register-logo">
-    <a href="../../index2.html"><b>Cadastre-se</b></a>
+    <b>Solicitação de Cadastro</b>
   </div>
 
   <div class="register-box-body">
-    <p class="login-box-msg">Forneça seus dados para o cadastro.</p>
+    <p class="login-box-msg">Forneça seus dados para solicitação de cadastro.</p>
     <app-alert-message></app-alert-message>
     <form #formCadastro="ngForm" name="formCadastro" (ngSubmit)="onSubmit(formCadastro)" role="form">
       <div class="form-group has-feedback">
@@ -13,7 +13,9 @@
                class="form-control"
                [(ngModel)]="cliente.razao_social"
                name="razao_social"
-               placeholder="Razão Social">
+               #razao_social="ngModel"
+               [required]="true"
+               placeholder="Razão Social"/>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -21,8 +23,10 @@
                class="form-control"
                [(ngModel)]="cliente.responsavel"
                name="responsavel"
+               #responsavel="ngModel"
+               [required]="true"
                placeholder="Responsável">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <input type="text"
@@ -31,24 +35,29 @@
                name="cnpj"
                [cnpj]="cliente.cnpj"
                #cnpjInput="ngModel"
+               [required]="true"
                placeholder="CNPJ"/>
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-        <div *ngIf="cnpjInput?.errors?.cnpj">CNPJ inválido</div>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+        <div class="is-invalid" *ngIf="cnpjInput?.errors?.cnpj">CNPJ inválido</div>
       </div>
       <div class="form-group has-feedback">
         <input type="text"
                class="form-control"
                [(ngModel)]="cliente.telefone"
                name="telefone"
-               placeholder="Telefone">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+               #telefone="ngModel"
+               [required]="true"
+               placeholder="Telefone"/>
+        <span class="glyphicon glyphicon-phone form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
         <input type="password"
                class="form-control"
                [(ngModel)]="cliente.password"
                name="password"
-               placeholder="Senha">
+               #password="ngModel"
+               [required]="true"
+               placeholder="Senha"/>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -56,8 +65,13 @@
                class="form-control"
                [(ngModel)]="cliente.confirma_senha"
                name="confirma_senha"
-               placeholder="Confirma Senha">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+               #confirma_senha="ngModel"
+               [required]="true"
+               placeholder="Confirma Senha"/>
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        <div *ngIf="formCadastro.submitted && confirma_senha.invalid" class="invalid-feedback">
+          <div *ngIf="confirma_senha.errors.mustMatch">The passwords must be match</div>
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-8">
@@ -72,8 +86,8 @@
 
       </div>
     </form>
-
-    <a href="#" [routerLink]="['/login']" class="text-center">Eu já sou cadastrado.</a>
+     <br/>
+    <a href="#" [routerLink]="['/login']" class="text-center">Já é cadastrado? Então clique aqui para fazer o login.</a>
   </div>
 
 </div>

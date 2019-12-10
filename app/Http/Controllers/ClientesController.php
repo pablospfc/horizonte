@@ -80,11 +80,15 @@ class ClientesController extends Controller
     public function store(Request $request)
     {
         try {
+            $data = $request->all();
+            if (!$this->clientes->checkCNPJ($data['cnpj'])){
+                return response()->json(['message' => 'CNPJ já cadastrado no sistema.'],401);
+            }
             $this->clientes->salvar($request->all());
-            return response()->json(['message' => 'O seu cadastro foi realizado com sucesso. Aguarde a aprovação do Horizonte Contabilidade.'],200);
+            return response()->json(['message' => 'Sua solicitação de cadastro foi realizada com sucesso. Aguarde a aprovação do Horizonte Contabilidade.'],200);
         }catch(\Exception $e) {
             \App\Model\Log::create(['message' => $e->getMessage()]);
-            return response()->json(['message' => 'Ocorreu um problema ao realizar seu cadastro. Tente novamente.'],500);
+            return response()->json(['message' => 'Ocorreu um problema ao realizar sua solicitação de cadastro. Tente novamente.'],500);
         }
     }
 

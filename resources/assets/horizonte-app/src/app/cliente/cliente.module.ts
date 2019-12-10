@@ -4,9 +4,10 @@ import { ListClientesComponent } from './list-clientes/list-clientes.component';
 import { NewClientesComponent } from './new-clientes/new-clientes.component';
 import {RouterModule} from "@angular/router";
 import {DataTablesModule} from "angular-datatables";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {DocumentoModule} from "../documento/documento.module";
 import {CpfCnpjModule} from "ng2-cpf-cnpj";
+import {AppModule} from "../app.module";
 
 
 
@@ -17,8 +18,10 @@ import {CpfCnpjModule} from "ng2-cpf-cnpj";
     RouterModule,
     DataTablesModule,
     FormsModule,
+    ReactiveFormsModule,
     DocumentoModule,
-    CpfCnpjModule
+    CpfCnpjModule,
+
   ]
 })
 export class ClienteModule { }

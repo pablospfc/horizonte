@@ -23,28 +23,29 @@ import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {RefreshTokenInterceptor} from "./interceptors/refresh-token.interceptor";
 import {AplicationErrorHandle} from "./app.error-handle";
 import {CpfCnpjModule} from "ng2-cpf-cnpj";
+import {AuthModule} from "./auth/auth.module";
+import {HomeModule} from "./home/home.module";
+import {LayoutModule} from "./layout/layout.module";
 @NgModule({
   declarations: [
     AppComponent,
     DashboardTemplateComponent,
-    LoginTemplateComponent,
-    HeaderComponent,
-    FooterComponent,
-    MenuComponent,
-    HomeComponent,
-    LoginComponent,
+    LoginTemplateComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ClienteModule,
+    AuthModule,
+    HomeModule,
+    LayoutModule,
     HttpClientModule,
     DataTablesModule,
     DocumentoModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
     CpfCnpjModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [ AuthGuard,
     {
@@ -58,6 +59,7 @@ import {CpfCnpjModule} from "ng2-cpf-cnpj";
     }
   ],
   exports: [
+
   ],
   bootstrap: [AppComponent]
 })

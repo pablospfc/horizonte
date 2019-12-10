@@ -9,6 +9,11 @@ import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [FooterComponent, MenuComponent, HeaderComponent],
+  exports: [
+    HeaderComponent,
+    MenuComponent,
+    FooterComponent
+  ],
   imports: [
     CommonModule,
     RouterModule

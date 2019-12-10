@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         // attempt to verify the credentials and create a token for the user
         if (!$token = $this->jwtAuth->attempt($credentials)) {
-            return response()->json(['error' => 'Não foi possível acessar o sistema. Verifique se seus dados estejam corretos.'], 401);
+            return response()->json(['error' => 'Não foi possível acessar o sistema. Verifique se seus dados estão corretos.'], 401);
         }
 
         $user = $this->jwtAuth->authenticate($token);
@@ -32,10 +32,10 @@ class AuthController extends Controller
                 ->first()
                 ->toArray();
 
-            if ($data['id_status_cliente'] == 2) {
+            if ($data['id_status_cliente'] == 3) {
                 return response()->json(['error' => 'O Horizonte Contabilidade está validando seus dados. Por favor, aguarde.'], 401);
-            } elseif ($data['id_status_cliente'] == 3) {
-                return response()->json(['error' => 'Você não tem permissão para acessar a Área do Cliente. Esta área do site é exclusiva para clientes.'], 401);
+            } elseif ($data['id_status_cliente'] == 2) {
+                return response()->json(['error' => 'Você não tem permissão para acessar esta área. Esta área do site é exclusiva para clientes.'], 401);
             }
         }
 

@@ -26,7 +26,7 @@ export class ClientesService {
     return this.http.post(`${this.api}/cadastrar`, cliente)
       .pipe(
         catchError(error => {
-        return throwError(error.error);
+        return throwError(error);
       })
       );
   }
@@ -44,7 +44,7 @@ export class ClientesService {
     return this.http.put(`${this.api}/avaliar/${cliente.id}`,cliente)
       .pipe(
         catchError(error => {
-          return throwError(error.error);
+          return throwError(error);
         })
       );
   }
