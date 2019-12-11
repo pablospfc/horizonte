@@ -40,7 +40,7 @@
             <select class="form-control"
                     id="id_mes"
                     [(ngModel)]="documento.id_mes"
-                    [required]="documento.id_tipo_documento != 1 || documento.id_tipo_documento != 7 || documento.id_tipo_documento != 8 || documento.id_tipo_documento != 6"
+                    [required]="documento.id_tipo_documento == 2 || documento.id_tipo_documento == 3 || documento.id_tipo_documento == 4"
                     name="id_mes">
               <option *ngFor="let mes of meses" [value]="mes.id">{{mes.nome}}</option>
             </select>
