@@ -57,6 +57,19 @@ class AuthController extends Controller
         return response()->json(['logout']);
     }
 
+    public function atualizar(Request $request, $id) {
+        try {
+            $data = $request->all();
+            $data['password'] = bcrypt($data['password']);
+            \App\Model\User::where('id', $id)
+                ->update($data);
+            return response()->json(['message' => 'Seus dados foram atualizados com sucesso.'], 200);
+        }catch(\Exception $e) {
+         \App\Model\Log::create(['message' => $e->getMessage()] );
+         return response()->json(['message' => 'Ocorreu um problema ao atualizar seus dados. Por favor tente novamente']);
+        }
+    }
+
     public function me()
     {
         if (!$user = $this->jwtAuth->parseToken()->authenticate()) {

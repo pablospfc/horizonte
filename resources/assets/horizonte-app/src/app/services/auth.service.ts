@@ -58,4 +58,13 @@ export class AuthService {
       });
 
   }
+
+  public updateUser(user) {
+   return this.http.put(`${this.API}/atualizar/${user.id}`, user)
+     .pipe(
+       catchError(error => {
+         return throwError(error);
+       })
+     );
+  }
 }

@@ -16,6 +16,7 @@ Route::get('/', function () {
 });
 Route::post('auth/login','AuthController@login');
 Route::post('auth/refresh','AuthController@refresh');
+Route::put('auth/atualizar','AuthController@update');
 Route::get('auth/logout','AuthController@logout');
 
 Route::post('clientes/cadastrar',"ClientesController@store");
