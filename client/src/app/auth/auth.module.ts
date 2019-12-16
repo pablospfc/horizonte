@@ -5,6 +5,7 @@ import {RouterModule} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {DocumentoModule} from "../documento/documento.module";
 import { PerfilComponent } from './perfil/perfil.component';
+import {NgxLoadingModule} from "ngx-loading";
 
 
 
@@ -14,7 +15,8 @@ import { PerfilComponent } from './perfil/perfil.component';
     CommonModule,
     RouterModule,
     FormsModule,
-    DocumentoModule
+    DocumentoModule,
+    NgxLoadingModule
   ]
 })
 export class AuthModule { }

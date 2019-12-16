@@ -26,6 +26,7 @@ import {CpfCnpjModule} from "ng2-cpf-cnpj";
 import {AuthModule} from "./auth/auth.module";
 import {HomeModule} from "./home/home.module";
 import {LayoutModule} from "./layout/layout.module";
+import {ngxLoadingAnimationTypes, NgxLoadingModule} from 'ngx-loading';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,12 @@ import {LayoutModule} from "./layout/layout.module";
     DocumentoModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
+    NgxLoadingModule.forRoot({animationType: ngxLoadingAnimationTypes.wanderingCubes,
+      backdropBackgroundColour: 'rgba(0,0,0,0.1)',
+      backdropBorderRadius: '4px',
+      primaryColour: '#ffffff',
+      secondaryColour: '#ffffff',
+      tertiaryColour: '#ffffff'}),
     CpfCnpjModule,
     FormsModule,
   ],

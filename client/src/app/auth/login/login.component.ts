@@ -13,6 +13,7 @@ import {NgForm} from "@angular/forms";
 export class LoginComponent implements OnInit {
 
   usuario: Usuario;
+  public loading = false;
   constructor(private authService: AuthService,
               private router: Router,
               private alertService: AlertService) { }
@@ -22,10 +23,13 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    this.loading = true;
     return this.authService.login(form.value)
       .subscribe((resp) => {
+        this.loading = false;
         this.router.navigate(['home']);
       }, (error) => {
+        this.loading = false;
         this.alertService.error(error);
       });
   }
