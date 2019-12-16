@@ -1,0 +1,75 @@
+<section class="content-header">
+  <h1>
+    Clientes
+    <small>Listar</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Clientes</li>
+    <li class="active">Listar Clientes</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="box box-primary">
+    <div class="box-header">
+      <i class="ion ion-clipboard"></i>
+
+      <h3 class="box-title">Listagem de Clientes</h3>
+
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+      <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="tblClientes"
+             class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Razão Social</th>
+          <th>Responsável</th>
+          <th>CNPJ</th>
+          <th>Telefone</th>
+          <th>Situação</th>
+          <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <td>{{cliente.razao_social}}</td>
+          <td>{{cliente.responsavel}}</td>
+          <td>{{cliente.cnpj}}</td>
+          <td>{{cliente.telefone}}</td>
+          <td>
+            <span class="label"
+                  [ngClass]="{'label-warning': cliente.id_status_cliente == 3, 'label-success': cliente.id_status_cliente == 1, 'label-danger': cliente.id_status_cliente == 2}">
+              {{cliente.status}}
+            </span>
+          </td>
+          <td>
+            <button type="button"
+                    (click)="avaliar(cliente)"
+                    title="{{cliente.id_status_cliente == 1 ? 'Rejeitar' : 'Aprovar'}}"
+                    class="btn btn-sm"
+                    [ngClass]="{'btn-success': cliente.id_status_cliente != 1, 'btn-danger': cliente.id_status_cliente == 1}"
+            >
+              <i class="fa"
+                 [ngClass]="{'fa-check': cliente.id_status_cliente != 1, 'fa-close': cliente.id_status_cliente == 1}"
+                 aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+        <tr class="animate-repeat" *ngIf="clientes.length == 0">
+          <td colspan="8" class="text-center">
+            <em>
+              Nenhum resultado foi encontrado
+            </em>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- /.box-body -->
+
+  </div>
+</section>
+
