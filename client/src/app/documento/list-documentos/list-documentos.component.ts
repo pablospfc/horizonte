@@ -17,7 +17,7 @@ export class ListDocumentosComponent implements OnInit {
   documentos = [];
   modalRef: BsModalRef;
   id: number;
-
+  public loading = false;
   constructor(private modalService: BsModalService,
               private documentoService: DocumentoclienteService,
               private alertService: AlertService) {
@@ -29,8 +29,10 @@ export class ListDocumentosComponent implements OnInit {
 
   //list the all documents
   public listar() {
+    this.loading = true;
     this.documentoService.list()
       .subscribe(response => {
+        this.loading = false;
         this.documentos = response;
       }, error => {
 
@@ -39,8 +41,10 @@ export class ListDocumentosComponent implements OnInit {
 
   //download attached file
   downloadFile(arquivo: string) {
+    this.loading = true;
     this.documentoService.download(arquivo)
       .subscribe((res: any) => {
+        this.loading = false;
         this.documentoService.handleFile(res, arquivo);
       });
   }
@@ -56,7 +60,7 @@ export class ListDocumentosComponent implements OnInit {
     //Update the table information after close the modal.
     this.modalService.onHide.subscribe((reason: string) => {
       this.listar();
-    })
+    });
   }
 
   //Open the confirmation modal before to remove document.

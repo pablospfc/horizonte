@@ -12,6 +12,7 @@ import {Clientes} from "../../models/clientes.model";
 export class NewClientesComponent implements OnInit {
 
   cliente: Clientes;
+  public loading = false;
   constructor(private clientesService: ClientesService, private alertService: AlertService) {
   }
 
@@ -20,11 +21,14 @@ export class NewClientesComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
+    this.loading = true;
     this.clientesService.save(form.value)
       .subscribe(response => {
+        this.loading = false;
         const message = (response as any).message;
         this.alertService.success(message);
       }, error => {
+        this.loading = false;
         const message = (error as any).message;
         this.alertService.error(message);
       });

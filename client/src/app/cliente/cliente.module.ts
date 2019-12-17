@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {DocumentoModule} from "../documento/documento.module";
 import {CpfCnpjModule} from "ng2-cpf-cnpj";
 import {AppModule} from "../app.module";
+import {NgxLoadingModule} from "ngx-loading";
 
 
 
@@ -21,6 +22,7 @@ import {AppModule} from "../app.module";
     ReactiveFormsModule,
     DocumentoModule,
     CpfCnpjModule,
+    NgxLoadingModule,
 
   ]
 })

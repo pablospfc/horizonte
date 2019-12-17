@@ -15,6 +15,7 @@ import {FileUploadModule} from "ng2-file-upload";
 import {AppModule} from "../app.module";
 import {AlertMessageComponent} from "../alert/alert-message.component";
 import {AlertModule} from "ngx-bootstrap";
+import {NgxLoadingModule} from "ngx-loading";
 
 
 
@@ -28,7 +29,8 @@ import {AlertModule} from "ngx-bootstrap";
     RouterModule,
     FormsModule,
     FileUploadModule,
-    AlertModule
+    AlertModule,
+    NgxLoadingModule
   ]
 })
 export class DocumentoModule { }

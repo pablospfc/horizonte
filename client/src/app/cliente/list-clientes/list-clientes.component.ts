@@ -12,6 +12,7 @@ import {DataTableDirective} from "angular-datatables";
 export class ListClientesComponent implements OnInit, OnDestroy {
 
   public clientes = [];
+  public loading = false;
   dtElement: DataTableDirective;
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
@@ -26,20 +27,22 @@ export class ListClientesComponent implements OnInit, OnDestroy {
   }
 
   listar() {
-     this.clientesService.list()
+    this.loading = true;
+    this.clientesService.list()
       .subscribe(response => {
+        this.loading = false;
         this.clientes = response;
-        this.rerender();
-      })
+      });
   }
 
   avaliar(cliente) {
+    this.loading = true;
     this.clientesService.toEvaluate(cliente)
       .subscribe(response => {
-        console.log(response);
+        this.loading = false;
         this.listar();
       }, error => {
-          console.log("error");
+
         });
   }
 

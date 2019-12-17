@@ -25,7 +25,7 @@ export class NewDocumentoComponent implements OnInit {
   public tiposDocumentos = [];
   private file: File;
   private formData = new FormData();
-
+  public loading = false;
   constructor(private documentoService: DocumentoclienteService,
               private tiposDocumentosService: TiposdocumentosService,
               private clienteService: ClientesService,
@@ -46,20 +46,25 @@ export class NewDocumentoComponent implements OnInit {
 
   // get data by id
   buscar(id: number) {
+    this.loading = true;
     this.documentoService.getById(id)
       .subscribe(response => {
+        this.loading = false;
         this.documento = response;
       });
   }
 
   // submit form data to backend
   onSubmit(form: NgForm) {
+    this.loading = true;
     this.prepareDados(form.value);
     this.documentoService.save(this.formData)
       .subscribe(response => {
+        this.loading = false;
         const message = (response as any).message;
         this.alertService.success(message);
       }, error => {
+        this.loading = false;
         const message = (error as any).message;
         this.alertService.error(message);
       });
@@ -74,24 +79,30 @@ export class NewDocumentoComponent implements OnInit {
 
   // get data to show in the select box
   getClientes() {
+    this.loading = true;
     this.clienteService.listApproved()
       .subscribe(response => {
+        this.loading = false;
         this.clientes = response;
       });
   }
 
   // get data to show in the select box
   getTiposDocumentos() {
+    this.loading = true;
     this.tiposDocumentosService.list()
       .subscribe(response => {
+        this.loading = false;
         this.tiposDocumentos = response;
       });
   }
 
   // get data to show in the select box
   getMeses() {
+    this.loading = true;
     this.mesesService.list()
       .subscribe(response => {
+        this.loading = false;
         this.meses = response;
       });
   }
