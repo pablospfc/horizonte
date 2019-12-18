@@ -10,6 +10,9 @@ import {AuthService} from '../../services/auth.service';
 export class ListContratosComponent implements OnInit {
 
   documentos = [];
+  public page = 1;
+  public totalRec: number;
+  public loading = false;
   constructor(private documentoService: DocumentoclienteService, private auth: AuthService) { }
 
   ngOnInit() {
@@ -17,15 +20,20 @@ export class ListContratosComponent implements OnInit {
   }
 
   list() {
-    this.documentoService.getByTipo(1, this.auth.getUser().id)
+  this.loading = true;
+  this.documentoService.getByTipo(1, this.auth.getUser().id)
       .subscribe(response => {
         this.documentos = response;
+        this.loading = false;
+        this.totalRec = this.documentos.length;
       });
   }
 
   downloadFile(arquivo: string) {
+    this.loading = true;
     this.documentoService.download(arquivo)
       .subscribe((res: any) => {
+        this.loading = false;
         this.documentoService.handleFile(res, arquivo);
       });
   }
