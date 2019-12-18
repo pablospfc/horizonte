@@ -1,28 +1,23 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ClientesService} from "../../services/clientes.service";
-import {Clientes} from "../../models/clientes.model";
-import {Subject} from "rxjs";
-import {DataTableDirective} from "angular-datatables";
+import {ClientesService} from '../../services/clientes.service';
+import {Clientes} from '../../models/clientes.model';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-list-clientes',
   templateUrl: './list-clientes.component.html',
   styleUrls: ['./list-clientes.component.scss']
 })
-export class ListClientesComponent implements OnInit, OnDestroy {
+export class ListClientesComponent implements OnInit {
 
   public clientes = [];
+  public page = 1;
+  public totalRec: number;
   public loading = false;
-  dtElement: DataTableDirective;
-  dtOptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject();
+
   constructor(private clientesService: ClientesService) { }
 
   ngOnInit() {
-    this.dtOptions = {
-      pagingType: 'full_numbers',
-      pageLength: 10
-    };
     this.listar();
   }
 
@@ -32,6 +27,7 @@ export class ListClientesComponent implements OnInit, OnDestroy {
       .subscribe(response => {
         this.loading = false;
         this.clientes = response;
+        this.totalRec = this.clientes.length;
       });
   }
 
@@ -44,19 +40,6 @@ export class ListClientesComponent implements OnInit, OnDestroy {
       }, error => {
 
         });
-  }
-
-  ngOnDestroy(): void {
-    this.dtTrigger.unsubscribe();
-  }
-
-  rerender(): void {
-    this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      // Destroy the table first
-      dtInstance.destroy();
-      // Call the dtTrigger to rerender again
-      this.dtTrigger.next();
-    });
   }
 
 }

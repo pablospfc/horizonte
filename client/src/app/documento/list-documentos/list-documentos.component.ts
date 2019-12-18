@@ -18,6 +18,8 @@ export class ListDocumentosComponent implements OnInit {
   modalRef: BsModalRef;
   id: number;
   public loading = false;
+  public page = 1;
+  public totalRec: number;
   constructor(private modalService: BsModalService,
               private documentoService: DocumentoclienteService,
               private alertService: AlertService) {
@@ -34,6 +36,7 @@ export class ListDocumentosComponent implements OnInit {
       .subscribe(response => {
         this.loading = false;
         this.documentos = response;
+        this.totalRec = this.documentos.length;
       }, error => {
 
       });

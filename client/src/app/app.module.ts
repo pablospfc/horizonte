@@ -25,8 +25,9 @@ import {AplicationErrorHandle} from "./app.error-handle";
 import {CpfCnpjModule} from "ng2-cpf-cnpj";
 import {AuthModule} from "./auth/auth.module";
 import {HomeModule} from "./home/home.module";
-import {LayoutModule} from "./layout/layout.module";
+import {LayoutModule} from './layout/layout.module';
 import {ngxLoadingAnimationTypes, NgxLoadingModule} from 'ngx-loading';
+import {NgxPaginationModule} from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import {ngxLoadingAnimationTypes, NgxLoadingModule} from 'ngx-loading';
     DocumentoModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
+    NgxPaginationModule,
     NgxLoadingModule.forRoot({animationType: ngxLoadingAnimationTypes.circle,
       backdropBorderRadius: '4px',
       primaryColour: '#FFFF00',

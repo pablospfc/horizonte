@@ -16,6 +16,7 @@ import {AppModule} from "../app.module";
 import {AlertMessageComponent} from "../alert/alert-message.component";
 import {AlertModule} from "ngx-bootstrap";
 import {NgxLoadingModule} from "ngx-loading";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 
@@ -24,13 +25,14 @@ import {NgxLoadingModule} from "ngx-loading";
   exports: [
     AlertMessageComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    FileUploadModule,
-    AlertModule,
-    NgxLoadingModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        FileUploadModule,
+        AlertModule,
+        NgxLoadingModule,
+        NgxPaginationModule
+    ]
 })
 export class DocumentoModule { }

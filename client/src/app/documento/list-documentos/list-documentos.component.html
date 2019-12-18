@@ -38,7 +38,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let documento of documentos">
+        <tr *ngFor="let documento of documentos | paginate: { id: 'listing_pagination',
+                                                      itemsPerPage: 3,
+                                                      currentPage: page,
+                                                      totalItems: totalRec}">
           <td>{{documento.cliente}}</td>
           <td>{{documento.tipo_documento}}</td>
           <td>{{documento.mes ? documento.mes : 'Não se aplica'}}</td>
@@ -74,6 +77,9 @@
         </tr>
         </tbody>
       </table>
+      <div>
+        <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+      </div>
     </div>
     <!-- /.box-body -->
 

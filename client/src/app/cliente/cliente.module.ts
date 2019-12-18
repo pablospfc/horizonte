@@ -9,21 +9,23 @@ import {DocumentoModule} from "../documento/documento.module";
 import {CpfCnpjModule} from "ng2-cpf-cnpj";
 import {AppModule} from "../app.module";
 import {NgxLoadingModule} from "ngx-loading";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 
 @NgModule({
   declarations: [ListClientesComponent, NewClientesComponent],
-  imports: [
-    CommonModule,
-    RouterModule,
-    DataTablesModule,
-    FormsModule,
-    ReactiveFormsModule,
-    DocumentoModule,
-    CpfCnpjModule,
-    NgxLoadingModule,
+    imports: [
+        CommonModule,
+        RouterModule,
+        DataTablesModule,
+        FormsModule,
+        ReactiveFormsModule,
+        DocumentoModule,
+        CpfCnpjModule,
+        NgxLoadingModule,
+        NgxPaginationModule,
 
-  ]
+    ]
 })
 export class ClienteModule { }
