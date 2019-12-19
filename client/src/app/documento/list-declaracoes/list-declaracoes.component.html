@@ -37,7 +37,7 @@
                                                       totalItems: totalRec }">
           <td>{{documento.tipo_documento}}</td>
           <td>{{documento.ano}}</td>
-          <td>{{documento.descricao}}</td>
+          <td>{{documento.descricao ? documento.descricao : 'Nenhuma'}}</td>
           <td>
             <button type="button"
                     (click)="downloadFile(documento.md5_arquivo)"

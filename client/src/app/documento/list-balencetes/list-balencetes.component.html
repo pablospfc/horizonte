@@ -25,7 +25,6 @@
         <thead>
         <tr>
           <th>Documento</th>
-          <th>Mês</th>
           <th>Ano</th>
           <th>Descrição</th>
           <th>Arquivo</th>
@@ -37,9 +36,8 @@
                                                       currentPage: page,
                                                       totalItems: totalRec }">
           <td>{{documento.tipo_documento}}</td>
-          <td>{{documento.mes}}</td>
           <td>{{documento.ano}}</td>
-          <td>{{documento.descricao}}</td>
+          <td>{{documento.descricao ? documento.descricao : 'Nenhuma'}}</td>
           <td>
             <button type="button"
                     (click)="downloadFile(documento.md5_arquivo)"
