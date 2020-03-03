@@ -22,8 +22,8 @@ export class DocumentoclienteService {
   constructor(private http: HttpClient) {
   }
 
-  public list() {
-    return this.http.get<any>(`${this.api}/listar`)
+  public list(dados) {
+    return this.http.post<any>(`${this.api}/listar`, dados)
       .pipe(
         map(data => {
           return data;
@@ -35,7 +35,7 @@ export class DocumentoclienteService {
     return this.http.get<DocumentosCliente>(`${this.api}/getById/${id}`)
       .pipe(
         map(data => {
-          return data;
+          return data[0];
         })
       );
   }
@@ -114,7 +114,7 @@ export class DocumentoclienteService {
     return this.http.post(`${this.api}/atualizar/${documento.get('id')}`, documento)
       .pipe(
         catchError(error => {
-          return throwError(error.error);
+          return throwError(error);
         })
       );
   }
@@ -123,7 +123,7 @@ export class DocumentoclienteService {
     return this.http.delete(`${this.api}/excluir/${id}`)
       .pipe(
         catchError(error => {
-          return throwError(error.error);
+          return throwError(error);
         })
       );
   }

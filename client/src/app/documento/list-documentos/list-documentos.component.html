@@ -25,13 +25,71 @@
     <!-- /.box-header -->
     <div class="box-body">
       <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+      <form #formFiltro="ngForm" name="formFiltro" role="form" (ngSubmit)="listar(formFiltro)">
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="id_cliente">Cliente</label>
+            <select class="form-control"
+                    id="id_cliente"
+                    [(ngModel)]="filtro.id_cliente"
+                    name="id_cliente">
+              <option *ngFor="let cliente of clientes" [value]="cliente.id">{{cliente.responsavel}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-4">
+            <label for="id_tipo_documento">Tipo de Documento</label>
+            <select class="form-control"
+                    id="id_tipo_documento"
+                    [(ngModel)]="filtro.id_tipo_documento"
+                    (change)="getDocumentosByTipo(filtro.id_tipo_documento)"
+                    name="id_tipo_documento">
+              <option *ngFor="let tipoDocumento of tiposDocumentos" [value]="tipoDocumento.id">{{tipoDocumento.nome}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="id_documento">Documento</label>
+            <select class="form-control"
+                    id="id_documento"
+                    [(ngModel)]="filtro.id_documento"
+                    name="id_documento">
+              <option *ngFor="let doc of docs" [value]="doc.id">{{doc.nome}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="id_mes">Mês</label>
+            <select class="form-control"
+                    id="id_mes"
+                    [(ngModel)]="filtro.id_mes"
+                    name="id_mes">
+              <option *ngFor="let mes of meses" [value]="mes.id">{{mes.nome}}</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-3">
+            <label for="ano">Ano</label>
+            <input type="text"
+                   class="form-control"
+                   id="ano"
+                   name="ano"
+                   [(ngModel)]="filtro.ano">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success">Buscar</button>
+        <button type="button" (click)="clear()" class="btn btn-default">Limpar</button>
+      </form>
       <table id="tblDocumentos" class="table table-bordered table-striped">
         <thead>
         <tr>
           <th>Cliente</th>
           <th>Tipo de Documento</th>
+          <th>Documento</th>
           <th>Mês</th>
           <th>Ano</th>
+          <th>Descrição</th>
           <th>Arquivo</th>
           <th>Editar</th>
           <th>Excluir</th>
@@ -44,8 +102,10 @@
                                                       totalItems: totalRec}">
           <td>{{documento.cliente}}</td>
           <td>{{documento.tipo_documento}}</td>
+          <td>{{documento.documento}}</td>
           <td>{{documento.mes ? documento.mes : 'Não se aplica'}}</td>
           <td>{{documento.ano ? documento.ano : 'Não se aplica'}}</td>
+          <td>{{documento.descricao ? documento.descricao : 'Sem descrição'}}</td>
           <td>
             <button type="button"
                       (click)="downloadFile(documento.md5_arquivo)"

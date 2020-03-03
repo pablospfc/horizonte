@@ -1,7 +1,7 @@
 import {Component, OnInit, EventEmitter, Input, ViewChild, Output} from '@angular/core';
 import {DocumentosCliente} from '../../models/documentoscliente.model';
 import {DocumentoclienteService} from '../../services/documentocliente.service';
-import {NgForm} from '@angular/forms';
+import {NgForm, NgModel} from '@angular/forms';
 import {ClientesService} from '../../services/clientes.service';
 import {TiposdocumentosService} from '../../services/tiposdocumentos.service';
 import {MesesService} from '../../services/meses.service';
@@ -9,6 +9,8 @@ import {FileUploader, FileLikeObject} from 'ng2-file-upload';
 import {BsModalRef} from 'ngx-bootstrap';
 import {AlertService} from '../../services/alert.service';
 import {ListDocumentosComponent} from '../list-documentos/list-documentos.component';
+import {DocumentosService} from "../../services/documentos.service";
+import {Subject} from "rxjs";
 
 // import {EventEmitterService} from "../../services/event-emitter.service";
 @Component({
@@ -19,17 +21,20 @@ import {ListDocumentosComponent} from '../list-documentos/list-documentos.compon
 export class NewDocumentoComponent implements OnInit {
   @Input() id: number;
 
-  documento: DocumentosCliente;
+  public documento: DocumentosCliente;
   meses = [];
   public clientes = [];
+  public documentos = [];
   public tiposDocumentos = [];
   private file: File;
   private formData = new FormData();
   public loading = false;
+  private subject = new Subject<any>();
   constructor(private documentoService: DocumentoclienteService,
               private tiposDocumentosService: TiposdocumentosService,
               private clienteService: ClientesService,
               private mesesService: MesesService,
+              private documentosService: DocumentosService,
               private modalRef: BsModalRef,
               private alertService: AlertService) {
   }
@@ -40,7 +45,7 @@ export class NewDocumentoComponent implements OnInit {
     this.getTiposDocumentos();
     this.getMeses();
     if (this.id) {
-      this.buscar(this.id);
+     this.buscar(this.id);
     }
   }
 
@@ -49,9 +54,14 @@ export class NewDocumentoComponent implements OnInit {
     this.loading = true;
     this.documentoService.getById(id)
       .subscribe(response => {
-        this.loading = false;
         this.documento = response;
+        this.getDocumentosByTipo(this.documento.id_tipo_documento);
+        this.loading = false;
       });
+  }
+
+  onChange(value) {
+    console.log(value);
   }
 
   // submit form data to backend
@@ -87,6 +97,18 @@ export class NewDocumentoComponent implements OnInit {
       });
   }
 
+  getDocumentosByTipo(id) {
+    console.log(id);
+    this.loading = true;
+    this.documentosService.getByTipo(id)
+      .subscribe(response => {
+        this.documentos = response;
+        this.loading = false;
+      }, error => {
+        this.loading = false;
+      });
+  }
+
   // get data to show in the select box
   getTiposDocumentos() {
     this.loading = true;
@@ -116,7 +138,7 @@ export class NewDocumentoComponent implements OnInit {
   prepareDados(formulario) {
     formulario.id ? this.formData.append('id', formulario.id) : null;
     formulario.id_cliente ? this.formData.append('id_cliente', formulario.id_cliente) : null;
-    formulario.id_tipo_documento ? this.formData.append('id_tipo_documento', formulario.id_tipo_documento) : null;
+    formulario.id_documento ? this.formData.append('id_documento', formulario.id_documento) : null;
     formulario.id_mes ? this.formData.append('id_mes', formulario.id_mes ? formulario.id_mes : null) : null;
     formulario.ano ? this.formData.append('ano', formulario.ano ? formulario.ano : null) : null;
     formulario.descricao ? this.formData.append('descricao', formulario.descricao ? formulario.descricao : null) : null;

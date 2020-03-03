@@ -25,9 +25,11 @@ Route::group(['middleware' => 'cors'], function() {
     Route::get('clientes/listarAprovados', "ClientesController@listarAprovados");
     Route::put('clientes/avaliar/{id}', "ClientesController@avaliar");
     Route::post('documentoscliente/cadastrar', "DocumentosClienteController@store");
+    Route::post('mensagem/enviar', "MensagemController@enviar");
     Route::post('documentoscliente/atualizar/{id}', "DocumentosClienteController@update");
-    Route::get('documentoscliente/listar', "DocumentosClienteController@index");
+    Route::post('documentoscliente/listar', "DocumentosClienteController@index");
     Route::get('documentoscliente/getById/{id}', "DocumentosClienteController@show");
+    Route::get('documentos/getByTipo/{id}', "DocumentosController@getByTipo");
     Route::get('documentoscliente/getByTipo/{id}/{user}', "DocumentosClienteController@getByTipo");
     Route::delete('documentoscliente/excluir/{id}', "DocumentosClienteController@destroy");
     Route::get('documentoscliente/download/{file}', "DocumentosClienteController@downloadFile");

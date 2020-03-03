@@ -1,5 +1,6 @@
 export class DocumentosCliente {
   id: number;
+  id_documento: number;
   id_tipo_documento: number;
   id_cliente: number;
   id_mes: number;

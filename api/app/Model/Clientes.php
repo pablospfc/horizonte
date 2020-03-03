@@ -45,6 +45,7 @@ class Clientes extends Model
                'id_cliente' => $idCliente,
                'name'       => $dados['responsavel'],
                'login'      => $dados['cnpj'],
+               'email'      => $dados['email'],
                'password'      => bcrypt($dados['password'])
             ]);
 
@@ -55,7 +56,6 @@ class Clientes extends Model
         $data = self::where('cnpj', $cnpj)
             ->get()
             ->toArray();
-         error_log(var_export($data,true));
         if (!empty($data) && is_array($data)){
             return false; //allow
         }

@@ -21,10 +21,10 @@ class DocumentosClienteController extends Controller
         $this->jwtAuth = $jwtAuth;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $data = $this->documentosCliente->getAll();
+            $data = $this->documentosCliente->getAll($request->all());
             return response()->json($data, 200);
         } catch (\Exception $e) {
             \App\Model\Log::create(['message' => $e->getMessage()]);
@@ -40,7 +40,7 @@ class DocumentosClienteController extends Controller
 
     public function getByTipo($id, $userLogged) {
         try {
-            $dados = $this->documentosCliente->getById($id, $userLogged);
+            $dados = $this->documentosCliente->getByTipo($id, $userLogged);
             return response()->json($dados, 200);
         }catch(\Exception $e) {
             \App\Model\Log::create(['message' => $e]);
@@ -110,7 +110,7 @@ class DocumentosClienteController extends Controller
     public function show($id)
     {
         try {
-            $data = \App\Model\DocumentosCliente::find($id);
+            $data = $this->documentosCliente->getById($id);
             return response()->json($data, 200);
         } catch (\Exception $e) {
             \App\Model\Log::create(['message' => $e->getMessage()]);
@@ -142,7 +142,6 @@ class DocumentosClienteController extends Controller
             $nameFile = null;
             $dados = $request->all();
             unset($dados['_method']);
-            error_log(var_export($dados,true));
             // Verifica se informou o arquivo e se é válido
             if ($request->hasFile('arquivo') && $request->file('arquivo')->isValid()) {
 
