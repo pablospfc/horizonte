@@ -19,7 +19,7 @@
                     [(ngModel)]="documento.id_cliente"
                     [required]="true"
                     name="id_cliente">
-              <option *ngFor="let cliente of clientes" [value]="cliente.id">{{cliente.responsavel}}</option>
+              <option *ngFor="let cliente of clientes" [value]="cliente.id">{{cliente.razao_social}}</option>
             </select>
           </div>
 

@@ -33,7 +33,7 @@
                     id="id_cliente"
                     [(ngModel)]="filtro.id_cliente"
                     name="id_cliente">
-              <option *ngFor="let cliente of clientes" [value]="cliente.id">{{cliente.responsavel}}</option>
+              <option *ngFor="let cliente of clientes" [value]="cliente.id">{{cliente.razao_social}}</option>
             </select>
           </div>
 
