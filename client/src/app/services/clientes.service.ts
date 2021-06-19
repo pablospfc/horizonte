@@ -22,12 +22,30 @@ export class ClientesService {
       );
   }
 
+  public getById(id) {
+    return this.http.get<Clientes>(`${this.api}/getById/${id}`)
+      .pipe(
+        map(data => {
+          return data;
+        })
+      );
+  }
+
   public save(cliente) {
     return this.http.post(`${this.api}/cadastrar`, cliente)
       .pipe(
         catchError(error => {
         return throwError(error);
       })
+      );
+  }
+
+  public update(cliente) {
+    return this.http.put<any>(`${this.api}/atualizar/${cliente.id}`, cliente)
+      .pipe(
+        catchError(error => {
+          return throwError(error);
+        })
       );
   }
 

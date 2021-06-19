@@ -1,0 +1,71 @@
+
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Atualização de Cliente</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<app-alert-message></app-alert-message>
+<form #clienteForm="ngForm" name="clienteForm" role="form" (ngSubmit)="onSubmit(clienteForm)">
+  <input type="hidden" name="id" value="id" [(ngModel)]="cliente.id"/>
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col-md-10">
+        <div class="form-group">
+          <label for="razao_social">Razão Social</label>
+          <input type="text"
+                 class="form-control"
+                 id="razao_social"
+                 name="razao_social"
+                 [(ngModel)]="cliente.razao_social"
+                 [required]="false"
+                 placeholder="Razão Social"/>
+        </div>
+
+        <div class="form-group">
+          <label for="responsavel">Responsável</label>
+          <input type="text"
+                 class="form-control"
+                 id="responsavel"
+                 name="responsavel"
+                 [(ngModel)]="cliente.responsavel"
+                 [required]="false"
+                 placeholder="Responsável"/>
+        </div>
+
+        <div class="form-group">
+          <label for="cnpj">CNPJ</label>
+          <input type="text"
+                 class="form-control"
+                 id="cnpj"
+                 name="cnpj"
+                 [(ngModel)]="cliente.cnpj"
+                 [cnpj]="cliente.cnpj"
+                 #cnpjInput="ngModel"
+                 [required]="false"
+                 placeholder="CNPJ"/>
+          <div class="is-invalid" *ngIf="cnpjInput?.errors?.cnpj">CNPJ inválido</div>
+        </div>
+
+        <div class="form-group">
+          <label for="telefone">Telefone</label>
+          <input type="text"
+                 class="form-control"
+                 id="telefone"
+                 name="telefone"
+                 [(ngModel)]="cliente.telefone"
+                 [required]="false"
+                 placeholder="Telefone"/>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="!clienteForm.valid">Salvar</button>
+  </div>
+</form>
+
+<ngx-loading [show]="loading"></ngx-loading>
+

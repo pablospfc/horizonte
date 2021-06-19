@@ -17,6 +17,9 @@ import {ListDocumentosComponent} from './documento/list-documentos/list-document
 import {NewClientesComponent} from './cliente/new-clientes/new-clientes.component';
 import {AuthGuard} from './guards/auth.guard';
 import {NewMensagemComponent} from './mensagem/new-mensagem/new-mensagem.component';
+import {UpdateClienteModalComponent} from "./cliente/update-cliente-modal/update-cliente-modal.component";
+import {ListUsuariosComponent} from "./usuario/list-usuarios/list-usuarios.component";
+import {UpdateUsuarioModalComponent} from "./usuario/update-usuario-modal/update-usuario-modal.component";
 
 
 const routes: Routes = [
@@ -73,7 +76,19 @@ const routes: Routes = [
       {
         path: 'new-mensagem',
         component: NewMensagemComponent
-      }
+      },
+      {
+        path: 'update-cliente',
+        component: UpdateClienteModalComponent
+      },
+      {
+        path: 'list-usuarios',
+        component: ListUsuariosComponent
+      },
+      {
+        path: 'update-usuario',
+        component: UpdateUsuarioModalComponent
+      },
     ]
   },
   {

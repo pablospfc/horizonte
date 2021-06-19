@@ -85,6 +85,7 @@
         <thead>
         <tr>
           <th>Cliente</th>
+          <th>Empresa</th>
           <th>Tipo de Documento</th>
           <th>Documento</th>
           <th>Mês</th>
@@ -101,6 +102,7 @@
                                                       currentPage: page,
                                                       totalItems: totalRec}">
           <td>{{documento.cliente}}</td>
+          <td>{{documento.empresa}}</td>
           <td>{{documento.tipo_documento}}</td>
           <td>{{documento.documento}}</td>
           <td>{{documento.mes ? documento.mes : 'Não se aplica'}}</td>

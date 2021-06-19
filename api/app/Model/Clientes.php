@@ -52,6 +52,23 @@ class Clientes extends Model
         });
     }
 
+    public function atualizar($dados, $id) {
+        DB::transaction(function () use ($dados, $id) {
+            self::where("id", $id)
+                ->update($dados);
+
+            $user = User::where("id_cliente", $id)
+                ->select("id")
+                ->first();
+
+             User::where("id", $user['id'])
+            ->update([
+                'name'       => $dados['responsavel'],
+                'login'      => $dados['cnpj'],
+            ]);
+        });
+    }
+
     public function checkCNPJ($cnpj) {
         $data = self::where('cnpj', $cnpj)
             ->get()

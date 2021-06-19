@@ -4,5 +4,6 @@ export class Usuario {
   name: string;
   login: string;
   password: string;
-  email: string;
+  confirm_password: string;
+  emaltera_senha: boolean;
 }

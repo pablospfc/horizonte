@@ -67,11 +67,11 @@ export class ListDocumentosComponent implements OnInit {
 
   clear() {
     this.filtro = {
-      id_cliente: '',
-      id_tipo_documento: '',
-      id_documento: '',
-      id_mes: '',
-      ano: '',
+      id_cliente: null,
+      id_tipo_documento: null,
+      id_documento: null,
+      id_mes: null,
+      ano: null,
     };
   }
 
@@ -83,7 +83,7 @@ export class ListDocumentosComponent implements OnInit {
         this.documentos = response;
         this.totalRec = this.documentos.length;
       }, error => {
-
+        this.loading = false;
       });
   }
 

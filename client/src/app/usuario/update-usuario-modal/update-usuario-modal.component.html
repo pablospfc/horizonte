@@ -1,0 +1,91 @@
+
+<div class="modal-header">
+  <h4 class="modal-title pull-left">Atualização de Cliente</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<app-alert-message></app-alert-message>
+<form #usuarioForm="ngForm" name="clienteForm" role="form" (ngSubmit)="onSubmit(usuarioForm)">
+  <input type="hidden" name="id" value="id" [(ngModel)]="usuario.id"/>
+  <div class="modal-body">
+
+    <div class="row">
+      <div class="col-md-10">
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input type="text"
+                 class="form-control"
+                 id="name"
+                 name="name"
+                 [(ngModel)]="usuario.name"
+                 [required]="true"
+                 [readOnly]="true"
+                 placeholder="Nome"/>
+        </div>
+
+        <div class="form-group">
+          <label for="id_perfil">Perfil</label>
+          <select class="form-control"
+                  id="id_perfil"
+                  [(ngModel)]="usuario.id_perfil"
+                  [required]="true"
+                  name="id_perfil">
+            <option [value]="1" >Administrador</option>
+            <option [value]="2" >Operador</option>
+            <option [value]="3" >Cliente</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="login">Login</label>
+          <input type="text"
+                 class="form-control"
+                 id="login"
+                 name="login"
+                 [readOnly]="true"
+                 [(ngModel)]="usuario.login"
+                 [required]="true"
+                 placeholder="Login"/>
+        </div>
+
+        <div class="form-group">
+          <input type="checkbox"
+                 name="altera_senha"
+                 [(ngModel)]="usuario.altera_senha">
+          Modificar Senha
+        </div>
+
+        <div *ngIf="usuario.altera_senha">
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password"
+                   class="form-control"
+                   id="password"
+                   [(ngModel)]="usuario.password"
+                   name="password"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="confirm_password">Confirma Senha</label>
+            <input type="password"
+                   class="form-control"
+                   id="confirm_password"
+                   [(ngModel)]="usuario.confirm_password"
+                   name="confirm_password"
+            />
+          </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" [disabled]="!usuarioForm.valid">Salvar</button>
+  </div>
+</form>
+
+<ngx-loading [show]="loading"></ngx-loading>
+
+

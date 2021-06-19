@@ -7,14 +7,14 @@ import {DataTablesModule} from "angular-datatables";
 import {FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {DocumentoModule} from "../documento/documento.module";
 import {CpfCnpjModule} from "ng2-cpf-cnpj";
-import {AppModule} from "../app.module";
-import {NgxLoadingModule} from "ngx-loading";
+import {NgxLoadingModule} from 'ngx-loading';
 import {NgxPaginationModule} from "ngx-pagination";
+import { UpdateClienteModalComponent } from './update-cliente-modal/update-cliente-modal.component';
 
 
 
 @NgModule({
-  declarations: [ListClientesComponent, NewClientesComponent],
+  declarations: [ListClientesComponent, NewClientesComponent, UpdateClienteModalComponent],
     imports: [
         CommonModule,
         RouterModule,

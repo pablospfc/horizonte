@@ -51,7 +51,8 @@ class DocumentosCliente extends Model
             "mes.nome as mes",
             "tpd.nome as tipo_documento",
             "doc.nome as documento",
-            "cli.responsavel as cliente"
+            "cli.responsavel as cliente",
+            "cli.razao_social as empresa"
         )
             ->from("documentos_cliente as dcl")
             ->leftJoin("meses as mes", "dcl.id_mes", "=", "mes.id")

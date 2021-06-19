@@ -21,9 +21,14 @@ Route::group(['middleware' => 'cors'], function() {
     Route::get('auth/logout', 'AuthController@logout');
 
     Route::post('clientes/cadastrar', "ClientesController@store");
+    Route::put('clientes/atualizar/{id}', "ClientesController@update");
     Route::get('clientes/listar', "ClientesController@index");
     Route::get('clientes/listarAprovados', "ClientesController@listarAprovados");
+    Route::get('clientes/getById/{id}', "ClientesController@show");
     Route::put('clientes/avaliar/{id}', "ClientesController@avaliar");
+    Route::get('usuarios/listar', "UsuariosController@index");
+    Route::get('usuarios/getById/{id}', "UsuariosController@show");
+    Route::put('usuarios/atualizar/{id}', "UsuariosController@update");
     Route::post('documentoscliente/cadastrar', "DocumentosClienteController@store");
     Route::post('mensagem/enviar', "MensagemController@enviar");
     Route::post('documentoscliente/atualizar/{id}', "DocumentosClienteController@update");
@@ -33,7 +38,6 @@ Route::group(['middleware' => 'cors'], function() {
     Route::get('documentoscliente/getByTipo/{id}/{user}', "DocumentosClienteController@getByTipo");
     Route::delete('documentoscliente/excluir/{id}', "DocumentosClienteController@destroy");
     Route::get('documentoscliente/download/{file}', "DocumentosClienteController@downloadFile");
-
     Route::get('tiposdocumentos/listar', "TiposDocumentosController@index");
     Route::get('meses/listar', "MesesController@index");
 });

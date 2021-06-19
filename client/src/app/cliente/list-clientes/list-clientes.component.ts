@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ClientesService} from '../../services/clientes.service';
-import {Clientes} from '../../models/clientes.model';
-import {Subject} from 'rxjs';
+import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
+import {UpdateClienteModalComponent} from '../update-cliente-modal/update-cliente-modal.component';
 
 @Component({
   selector: 'app-list-clientes',
@@ -14,8 +14,10 @@ export class ListClientesComponent implements OnInit {
   public page = 1;
   public totalRec: number;
   public loading = false;
+  modalRef: BsModalRef;
 
-  constructor(private clientesService: ClientesService) { }
+  constructor(private clientesService: ClientesService,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
     this.listar();
@@ -29,6 +31,20 @@ export class ListClientesComponent implements OnInit {
         this.clientes = response;
         this.totalRec = this.clientes.length;
       });
+  }
+
+  openModalCliente(id) {
+    // Open the modal by passing the id, if exists
+    this.modalRef = this.modalService.show(UpdateClienteModalComponent, {
+      initialState: {
+        id
+      }
+    });
+
+    // Update the table information after close the modal.
+    this.modalService.onHide.subscribe((reason: string) => {
+      this.listar();
+    });
   }
 
   avaliar(cliente) {

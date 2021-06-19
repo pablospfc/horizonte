@@ -79,6 +79,11 @@
           <li><a href="#" [routerLink]="['/list-contratos']"><i class="fa fa-circle-o"></i> Parte Contratual</a></li>
         </ul>
       </li>
+      <li *ngIf="auth.getUser().id_perfil != 3">
+        <a href="#" [routerLink]="['/list-usuarios']">
+          <i class="fa fa-user"></i> <span>Usuários</span>
+        </a>
+      </li>
     </ul>
   </section>
   <!-- /.sidebar -->

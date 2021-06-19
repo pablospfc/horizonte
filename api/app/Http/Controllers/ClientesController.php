@@ -75,7 +75,7 @@ class ClientesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -96,11 +96,17 @@ class ClientesController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show($id)
     {
-        //
+        try {
+            $data = \App\Model\Clientes::find($id);
+            return response()->json($data,200);
+        }catch(\Exception $e) {
+            \App\Model\Log::create(['message' => $e->getMessage()]);
+            return response()->json(['message' => 'Erro ao buscar cliente. Tente novamente'],500);
+        }
     }
 
     /**
@@ -119,11 +125,17 @@ class ClientesController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $this->clientes->atualizar($request->all(), $id);
+            return response()->json(['message' => 'Atualizado com sucesso'],200);
+        }catch(\Exception $e) {
+            \App\Model\Log::create(['message' => $e->getMessage()]);
+            return response()->json(['message' => 'Erro ao atualizar cliente. Tente novamente'],500);
+    }
     }
 
     /**
