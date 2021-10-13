@@ -22,4 +22,14 @@ export class TiposdocumentosService {
       );
   }
 
+  public getByUserSetor(user) {
+    let usr = user ? user : 0;
+    return this.http.get<TiposDocumentos[]>(`${this.api}/getByUserSetor/${usr}`)
+      .pipe(
+        map(data => {
+          return data;
+        })
+      );
+  }
+
 }

@@ -27,7 +27,7 @@ class DocumentosCliente extends Model
         "md5_arquivo"
     ];
 
-    public function getAll($params)
+    public function getAll($params, $setor)
     {
         $cliente = false;
         $tipoDocumento = false;
@@ -59,6 +59,7 @@ class DocumentosCliente extends Model
             ->join("clientes as cli", "dcl.id_cliente", "=", "cli.id")
             ->join("documentos as doc", "dcl.id_documento", "=", "doc.id")
             ->join("tipos_documentos as tpd", "doc.id_tipo_documento", "=", "tpd.id")
+            ->leftJoin("setor_tipos_documentos as std", "std.id_tipo_documento", "=", "tpd.id")
             ->when($cliente, function ($query) use ($params)  {
                 return $query->where('dcl.id_cliente', $params['id_cliente']);
             })
@@ -73,6 +74,9 @@ class DocumentosCliente extends Model
             })
             ->when($ano, function ($query) use ($params) {
                 return $query->where('dcl.ano', $params['ano']);
+            })
+            ->when($setor, function ($query) use ($setor) {
+                return $query->where('std.id_setor', $setor);
             })
             ->get()
             ->toArray();

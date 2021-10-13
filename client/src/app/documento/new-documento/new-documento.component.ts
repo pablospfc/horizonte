@@ -11,6 +11,7 @@ import {AlertService} from '../../services/alert.service';
 import {ListDocumentosComponent} from '../list-documentos/list-documentos.component';
 import {DocumentosService} from "../../services/documentos.service";
 import {Subject} from "rxjs";
+import {AuthService} from '../../services/auth.service';
 
 // import {EventEmitterService} from "../../services/event-emitter.service";
 @Component({
@@ -36,13 +37,14 @@ export class NewDocumentoComponent implements OnInit {
               private mesesService: MesesService,
               private documentosService: DocumentosService,
               private modalRef: BsModalRef,
+              private authService: AuthService,
               private alertService: AlertService) {
   }
 
   ngOnInit() {
     this.documento = new DocumentosCliente();
     this.getClientes();
-    this.getTiposDocumentos();
+    this.getTiposDocumentosUserBySetor();
     this.getMeses();
     if (this.id) {
      this.buscar(this.id);
@@ -110,9 +112,18 @@ export class NewDocumentoComponent implements OnInit {
   }
 
   // get data to show in the select box
-  getTiposDocumentos() {
+  // getTiposDocumentos() {
+  //   this.loading = true;
+  //   this.tiposDocumentosService.list()
+  //     .subscribe(response => {
+  //       this.loading = false;
+  //       this.tiposDocumentos = response;
+  //     });
+  // }
+
+  getTiposDocumentosUserBySetor() {
     this.loading = true;
-    this.tiposDocumentosService.list()
+    this.tiposDocumentosService.getByUserSetor(this.authService.getUser().id_setor)
       .subscribe(response => {
         this.loading = false;
         this.tiposDocumentos = response;

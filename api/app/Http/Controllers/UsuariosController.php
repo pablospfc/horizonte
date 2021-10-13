@@ -26,6 +26,11 @@ class UsuariosController extends Controller
         }
     }
 
+    public function createPassword(Request $request) {
+        $dados = $request->all();
+        return bcrypt($dados['password']);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

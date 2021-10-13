@@ -22,8 +22,8 @@ export class DocumentoclienteService {
   constructor(private http: HttpClient) {
   }
 
-  public list(dados) {
-    return this.http.post<any>(`${this.api}/listar`, dados)
+  public list(dados, setor) {
+    return this.http.post<any>(`${this.api}/listar/${setor}`, dados)
       .pipe(
         map(data => {
           return data;

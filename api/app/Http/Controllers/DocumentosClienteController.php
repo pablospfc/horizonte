@@ -21,10 +21,11 @@ class DocumentosClienteController extends Controller
         $this->jwtAuth = $jwtAuth;
     }
 
-    public function index(Request $request)
+    public function index(Request $request, $setor)
     {
         try {
-            $data = $this->documentosCliente->getAll($request->all());
+            error_log($setor);
+            $data = $this->documentosCliente->getAll($request->all(), $setor);
             return response()->json($data, 200);
         } catch (\Exception $e) {
             \App\Model\Log::create(['message' => $e->getMessage()]);

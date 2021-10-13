@@ -10,6 +10,7 @@ import {TiposdocumentosService} from "../../services/tiposdocumentos.service";
 import {DocumentosService} from "../../services/documentos.service";
 import {MesesService} from "../../services/meses.service";
 import {NgForm} from "@angular/forms";
+import {AuthService} from '../../services/auth.service';
 
 //import {EventEmitterService} from "../../services/event-emitter.service";
 
@@ -26,6 +27,7 @@ export class ListDocumentosComponent implements OnInit {
   meses = [];
   modalRef: BsModalRef;
   id: number;
+  public idSetor;
   public loading = false;
   public page = 1;
   public totalRec: number;
@@ -37,6 +39,7 @@ export class ListDocumentosComponent implements OnInit {
     ano: '',
   };
   constructor(private modalService: BsModalService,
+              private authService: AuthService,
               private documentoClienteService: DocumentoclienteService,
               private clienteService: ClientesService,
               private tipoDocumentoService: TiposdocumentosService,
@@ -48,14 +51,14 @@ export class ListDocumentosComponent implements OnInit {
   ngOnInit() {
     this.getClientes();
     this.getMeses();
-    this.getTiposDocumentos();
     this.list();
+    this.getTiposDocumentosUserBySetor();
   }
 
   //list the all documents
   public listar(form: NgForm) {
     this.loading = true;
-    this.documentoClienteService.list(form.value)
+    this.documentoClienteService.list(form.value, this.authService.getUser().id_setor)
       .subscribe(response => {
         this.loading = false;
         this.documentos = response;
@@ -77,7 +80,7 @@ export class ListDocumentosComponent implements OnInit {
 
   public list() {
     this.loading = true;
-    this.documentoClienteService.list(this.filtro)
+    this.documentoClienteService.list(this.filtro, this.authService.getUser().id_setor)
       .subscribe(response => {
         this.loading = false;
         this.documentos = response;
@@ -96,9 +99,18 @@ export class ListDocumentosComponent implements OnInit {
       });
   }
 
-  getTiposDocumentos() {
+  // getTiposDocumentos() {
+  //   this.loading = true;
+  //   this.tipoDocumentoService.list()
+  //     .subscribe(response => {
+  //       this.loading = false;
+  //       this.tiposDocumentos = response;
+  //     });
+  // }
+
+  getTiposDocumentosUserBySetor() {
     this.loading = true;
-    this.tipoDocumentoService.list()
+    this.tipoDocumentoService.getByUserSetor(this.authService.getUser().id_setor)
       .subscribe(response => {
         this.loading = false;
         this.tiposDocumentos = response;
