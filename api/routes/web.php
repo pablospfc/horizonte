@@ -22,7 +22,7 @@ Route::group(['middleware' => 'cors'], function() {
 
     Route::post('clientes/cadastrar', "ClientesController@store");
     Route::put('clientes/atualizar/{id}', "ClientesController@update");
-    Route::get('clientes/listar', "ClientesController@index");
+    Route::post('clientes/listar', "ClientesController@index");
     Route::get('clientes/listarAprovados', "ClientesController@listarAprovados");
     Route::get('clientes/getById/{id}', "ClientesController@show");
     Route::put('clientes/avaliar/{id}', "ClientesController@avaliar");
@@ -42,4 +42,5 @@ Route::group(['middleware' => 'cors'], function() {
     Route::get('tiposdocumentos/listar', "TiposDocumentosController@index");
     Route::get('tiposdocumentos/getByUserSetor/{setor}', "TiposDocumentosController@getByUserSetor");
     Route::get('meses/listar', "MesesController@index");
+    Route::get('statuscliente/listar', "StatusClienteController@index");
 });

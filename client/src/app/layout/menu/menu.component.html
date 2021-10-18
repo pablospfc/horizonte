@@ -49,6 +49,16 @@
         </a>
       </li>
       <li *ngIf="auth.getUser().id_perfil != 2">
+        <a href="#" [routerLink]="['/list-certidoes']">
+          <i class="fa fa-list-alt"></i> <span>Certidões</span>
+        </a>
+      </li>
+      <li *ngIf="auth.getUser().id_perfil != 2">
+        <a href="#" [routerLink]="['/list-parcelamentos']">
+          <i class="fa fa-list-alt"></i> <span>Parcelamentos</span>
+        </a>
+      </li>
+      <li *ngIf="auth.getUser().id_perfil != 2">
         <a href="#" [routerLink]="['/list-boletos']">
           <i class="fa fa-barcode"></i> <span>Boletos</span>
         </a>

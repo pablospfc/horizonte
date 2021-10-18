@@ -20,13 +20,26 @@ class Clientes extends Model
         "telefone"
     ];
 
-    public function getAll() {
+    public function getAll($filter) {
+        error_log(var_export($filter,true));
         return self::select(
             "cl.*",
             "st.nome as status"
         )
             ->from("clientes as cl")
             ->join("status_cliente as st", "cl.id_status_cliente", "=", "st.id")
+            ->when(isset($filter["razaoSocial"]), function ($query) use ($filter)  {
+                return $query->where('cl.razao_social', 'like', '%'.$filter['razaoSocial'].'%');
+            })
+            ->when(isset($filter["responsavel"]), function ($query) use ($filter)  {
+                return $query->where('cl.responsavel', 'like', '%'.$filter['responsavel'].'%');
+            })
+            ->when(isset($filter["cnpj"]), function ($query) use ($filter)  {
+                return $query->where('cl.cnpj', $filter['cnpj']);
+            })
+            ->when(isset($filter["iStatus"]), function ($query) use ($filter)  {
+                return $query->where('cl.id_status_cliente', $filter['iStatus']);
+            })
             ->orderBy("cl.responsavel")
             ->get()
             ->toArray();

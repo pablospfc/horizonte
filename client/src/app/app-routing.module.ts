@@ -20,6 +20,7 @@ import {NewMensagemComponent} from './mensagem/new-mensagem/new-mensagem.compone
 import {UpdateClienteModalComponent} from "./cliente/update-cliente-modal/update-cliente-modal.component";
 import {ListUsuariosComponent} from "./usuario/list-usuarios/list-usuarios.component";
 import {UpdateUsuarioModalComponent} from "./usuario/update-usuario-modal/update-usuario-modal.component";
+import {ListParcelamentosComponent} from './documento/list-parcelamentos/list-parcelamentos.component';
 
 
 const routes: Routes = [
@@ -60,6 +61,10 @@ const routes: Routes = [
       {
         path: 'list-declaracoes',
         component: ListDeclaracoesComponent
+      },
+      {
+        path: 'list-parcelamentos',
+        component: ListParcelamentosComponent
       },
       {
         path: 'list-faturamentos',

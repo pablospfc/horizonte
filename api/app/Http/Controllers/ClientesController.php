@@ -20,10 +20,10 @@ class ClientesController extends Controller
         $this->clientes = new Clientes();
     }
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $dados = $this->clientes->getAll();
+            $dados = $this->clientes->getAll($request->all());
             return response()->json($dados, 200);
         } catch (\Exception $e) {
             \App\Model\Log::create(['message' => $e->getMessage()]);

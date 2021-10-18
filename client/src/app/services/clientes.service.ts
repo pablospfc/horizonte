@@ -13,8 +13,9 @@ export class ClientesService {
   private readonly api = `${environment.API}/clientes`;
   constructor(private http: HttpClient) { }
 
-  public list() {
-    return this.http.get<Clientes[]>(`${this.api}/listar`)
+  public list(filtro) {
+    console.log(filtro);
+    return this.http.post<Clientes[]>(`${this.api}/listar`, filtro)
       .pipe(
         map(data => {
           return data;

@@ -21,6 +21,45 @@
     <!-- /.box-header -->
     <div class="box-body">
       <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+      <form #formFiltro="ngForm" name="formFiltro" role="form" (ngSubmit)="onShow(formFiltro)">
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label for="razaoSocial">Razão Social</label>
+            <input type="text"
+                   class="form-control"
+                   id="razaoSocial"
+                   name="razaoSocial"
+                   [(ngModel)]="filtroCliente.razaoSocial">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="responsavel">Responsável</label>
+            <input type="text"
+                   class="form-control"
+                   id="responsavel"
+                   name="responsavel"
+                   [(ngModel)]="filtroCliente.responsavel">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="cnpj">CNPJ</label>
+            <input type="text"
+                   class="form-control"
+                   id="cnpj"
+                   name="cnpj"
+                   [(ngModel)]="filtroCliente.cnpj">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="iStatus">Status</label>
+            <select class="form-control"
+                    id="iStatus"
+                    [(ngModel)]="filtroCliente.iStatus"
+                    name="iStatus">
+              <option *ngFor="let st of statusCliente" [value]="st.id">{{st.nome}}</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success" style="margin-right: 5px;">Buscar</button>
+        <button type="button" (click)="clear()" class="btn btn-default">Limpar</button>
+      </form><br/>
       <table id="tblClientes" class="table table-bordered table-striped">
         <thead>
         <tr>

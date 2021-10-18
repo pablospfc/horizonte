@@ -24,7 +24,6 @@ class DocumentosClienteController extends Controller
     public function index(Request $request, $setor)
     {
         try {
-            error_log($setor);
             $data = $this->documentosCliente->getAll($request->all(), $setor);
             return response()->json($data, 200);
         } catch (\Exception $e) {

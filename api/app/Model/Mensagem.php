@@ -17,7 +17,6 @@ class Mensagem
     }
 
     public function sendMail($data) {
-        error_log(var_export($data,true));
         $this->email->isSMTP();
        // $this->email->SMTPDebug = 2;
         $this->email->SMTPOptions = array(

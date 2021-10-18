@@ -17,11 +17,12 @@ import {AlertMessageComponent} from "../alert/alert-message.component";
 import {AlertModule} from "ngx-bootstrap";
 import {NgxLoadingModule} from "ngx-loading";
 import {NgxPaginationModule} from "ngx-pagination";
+import { ListParcelamentosComponent } from './list-parcelamentos/list-parcelamentos.component';
 
 
 
 @NgModule({
-  declarations: [NewDocumentoComponent, ListDocumentosComponent, ListFaturamentosComponent, ListBalencetesComponent, ListBoletosComponent, ListDeclaracoesComponent, ListContratosComponent, ListCertidoesComponent, ListFolhasPagamentoComponent, AlertMessageComponent],
+  declarations: [NewDocumentoComponent, ListDocumentosComponent, ListFaturamentosComponent, ListBalencetesComponent, ListBoletosComponent, ListDeclaracoesComponent, ListContratosComponent, ListCertidoesComponent, ListFolhasPagamentoComponent, AlertMessageComponent, ListParcelamentosComponent],
   exports: [
     AlertMessageComponent
   ],

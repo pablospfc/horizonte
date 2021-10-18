@@ -20,6 +20,7 @@ class MensagemController extends Controller
             $this->mensagem->sendMail($request->all());
             return response()->json(['message' => 'Sua mensagem foi enviada com sucesso'],200);
         }catch(\Exception $e) {
+            \App\Model\Log::create(['message' => $e->getMessage()]);
             return response()->json(['message' => 'Ocorreu um problema ao enviar mensagem'],500);
         }
 

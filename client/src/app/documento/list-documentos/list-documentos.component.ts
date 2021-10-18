@@ -1,18 +1,14 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {BsModalRef, BsModalService} from 'ngx-bootstrap/modal';
-import {NewDocumentoComponent} from "../new-documento/new-documento.component";
-import {DocumentosCliente} from "../../models/documentoscliente.model";
-import {DocumentoclienteService} from "../../services/documentocliente.service";
-import {initialState} from "ngx-bootstrap/timepicker/reducer/timepicker.reducer";
-import {AlertService} from "../../services/alert.service";
-import {ClientesService} from "../../services/clientes.service";
-import {TiposdocumentosService} from "../../services/tiposdocumentos.service";
-import {DocumentosService} from "../../services/documentos.service";
-import {MesesService} from "../../services/meses.service";
-import {NgForm} from "@angular/forms";
+import {NewDocumentoComponent} from '../new-documento/new-documento.component';
+import {DocumentoclienteService} from '../../services/documentocliente.service';
+import {AlertService} from '../../services/alert.service';
+import {ClientesService} from '../../services/clientes.service';
+import {TiposdocumentosService} from '../../services/tiposdocumentos.service';
+import {DocumentosService} from '../../services/documentos.service';
+import {MesesService} from '../../services/meses.service';
+import {NgForm} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
-
-//import {EventEmitterService} from "../../services/event-emitter.service";
 
 @Component({
   selector: 'app-list-documentos',
@@ -55,7 +51,7 @@ export class ListDocumentosComponent implements OnInit {
     this.getTiposDocumentosUserBySetor();
   }
 
-  //list the all documents
+  // list the all documents
   public listar(form: NgForm) {
     this.loading = true;
     this.documentoClienteService.list(form.value, this.authService.getUser().id_setor)
@@ -137,7 +133,7 @@ export class ListDocumentosComponent implements OnInit {
       });
   }
 
-  //download attached file
+  // download attached file
   downloadFile(arquivo: string) {
     this.loading = true;
     this.documentoClienteService.download(arquivo)
@@ -148,31 +144,31 @@ export class ListDocumentosComponent implements OnInit {
   }
 
   openModalUpload(id: number = null) {
-    //Open the modal by passing the id, if exists
+    // Open the modal by passing the id, if exists
     this.modalRef = this.modalService.show(NewDocumentoComponent, {
       initialState: {
-        id: id
+        id
       }
     });
 
-    //Update the table information after close the modal.
+    // Update the table information after close the modal.
     this.modalService.onHide.subscribe((reason: string) => {
       this.list();
     });
   }
 
-  //Open the confirmation modal before to remove document.
+  // Open the confirmation modal before to remove document.
   openModalConfirm(template: TemplateRef<any>, id: number) {
     this.id = id;
     this.modalRef = this.modalService.show(template, {
       class: 'modal-sm',
       initialState: {
-        id: id
+        id
       }
     });
   }
 
-  //remove the document
+  // remove the document
   confirm(): void {
     this.documentoClienteService.remove(this.id)
       .subscribe(response => {
@@ -186,7 +182,7 @@ export class ListDocumentosComponent implements OnInit {
     this.list();
   }
 
-  //reject the document removal
+  // reject the document removal
   decline(): void {
     this.modalRef.hide();
   }
