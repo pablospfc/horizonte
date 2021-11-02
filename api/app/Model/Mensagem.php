@@ -32,7 +32,7 @@ class Mensagem
         $this->email->Port = 587;
         $this->email->CharSet = 'UTF-8';
         $this->email->Username = "horizonteassessoriaslz@gmail.com";
-        $this->email->Password = "45enef80khs1";
+        $this->email->Password = "xnoevsjvbvjoagor";
         $this->email->setFrom($data['from'], $data['from_name'],0);
         $this->email->addAddress($data['address'], 'Horizonte Assessoria');
         $this->email->addReplyTo($data['from'], "Reply");

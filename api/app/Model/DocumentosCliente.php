@@ -52,7 +52,9 @@ class DocumentosCliente extends Model
             "tpd.nome as tipo_documento",
             "doc.nome as documento",
             "cli.responsavel as cliente",
-            "cli.razao_social as empresa"
+            "cli.razao_social as empresa",
+            "dcl.created_at as dataCriacao",
+            "dcl.updated_at as dataAtualizacao"
         )
             ->from("documentos_cliente as dcl")
             ->leftJoin("meses as mes", "dcl.id_mes", "=", "mes.id")
@@ -75,8 +77,8 @@ class DocumentosCliente extends Model
             ->when($ano, function ($query) use ($params) {
                 return $query->where('dcl.ano', $params['ano']);
             })
-            ->when($setor, function ($query) use ($setor) {
-                return $query->where('std.id_setor', $setor);
+            ->when($setor != 'null', function ($query) use ($setor) {
+                    return $query->where('std.id_setor', $setor);
             })
             ->get()
             ->toArray();
