@@ -32,7 +32,7 @@ export class ListDocumentosComponent implements OnInit {
     id_tipo_documento: '',
     id_documento: '',
     id_mes: '',
-    ano: '',
+    ano: ''
   };
   constructor(private modalService: BsModalService,
               private authService: AuthService,
@@ -54,7 +54,7 @@ export class ListDocumentosComponent implements OnInit {
   // list the all documents
   public listar(form: NgForm) {
     this.loading = true;
-    this.documentoClienteService.list(form.value, this.authService.getUser().id_setor)
+    this.documentoClienteService.list(form.value )
       .subscribe(response => {
         this.loading = false;
         this.documentos = response;
@@ -70,13 +70,13 @@ export class ListDocumentosComponent implements OnInit {
       id_tipo_documento: null,
       id_documento: null,
       id_mes: null,
-      ano: null,
+      ano: null
     };
   }
 
   public list() {
     this.loading = true;
-    this.documentoClienteService.list(this.filtro, this.authService.getUser().id_setor)
+    this.documentoClienteService.list(this.filtro)
       .subscribe(response => {
         this.loading = false;
         this.documentos = response;

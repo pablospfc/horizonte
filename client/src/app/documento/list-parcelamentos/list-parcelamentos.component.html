@@ -1,0 +1,68 @@
+<section class="content-header">
+  <h1>
+    Parcelamentos
+    <small>Listar</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Parcelamentos</li>
+    <li class="active">Listar Parcelamentos</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="box box-primary">
+    <div class="box-header">
+      <i class="ion ion-clipboard"></i>
+
+      <h3 class="box-title">Parcelamentos</h3>
+      <app-alert-message></app-alert-message>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+      <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+      <table id="tblCertidao" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>Documento</th>
+          <th>Ano</th>
+          <th>Descrição</th>
+          <th>Arquivo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let documento of documentos | paginate: { id: 'listing_pagination',
+                                                      itemsPerPage: 10,
+                                                      currentPage: page,
+                                                      totalItems: totalRec }">
+          <td>{{documento.documento}}</td>
+          <td>{{documento.ano}}</td>
+          <td>{{documento.descricao ? documento.descricao : 'Nenhuma'}}</td>
+          <td>
+            <button type="button"
+                    (click)="downloadFile(documento.md5_arquivo)"
+                    class="btn btn-info btn-sm">
+              <i class="fa fa-download" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+        <tr class="animate-repeat" *ngIf="documentos.length == 0">
+          <td colspan="8" class="text-center">
+            <em>
+              Nenhum resultado foi encontrado
+            </em>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <div>
+        <pagination-controls  id="listing_pagination" maxSize="5" directionLinks="true" (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+    <!-- /.box-body -->
+
+  </div>
+</section>
+
+
+<ngx-loading [show]="loading"></ngx-loading>

@@ -15,7 +15,6 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>150</h3>
           <p>Clientes</p>
         </div>
         <div class="icon">
@@ -29,7 +28,6 @@
       <!-- small box -->
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>150</h3>
           <p>Documentos</p>
         </div>
         <div class="icon">
@@ -43,9 +41,9 @@
       <!-- small box -->
       <div class="small-box bg-yellow">
         <div class="inner">
-          <h3>150</h3>
           <p>Folhas de Pagamento</p>
         </div>
+        <br>
         <div class="icon">
           <i class="ion ion-ios-list"></i>
         </div>
@@ -57,9 +55,9 @@
       <!-- small box -->
       <div class="small-box bg-red">
         <div class="inner">
-          <h3>150</h3>
           <p>Parte Contratual</p>
         </div>
+        <br>
         <div class="icon">
           <i class="ion ion-document"></i>
         </div>
@@ -71,9 +69,9 @@
       <!-- small box -->
       <div class="small-box bg-aqua">
         <div class="inner">
-          <h3>150</h3>
           <p>Impostos sobre Faturamento</p>
         </div>
+        <br>
         <div class="icon">
           <i class="ion ion-cash"></i>
         </div>
@@ -85,9 +83,9 @@
       <!-- small box -->
       <div class="small-box bg-green">
         <div class="inner">
-          <h3>150</h3>
           <p>Boletos</p>
         </div>
+        <br>
         <div class="icon">
           <i class="ion ion-ios-barcode"></i>
         </div>
@@ -99,9 +97,9 @@
       <!-- small box -->
       <div class="small-box bg-teal">
         <div class="inner">
-          <h3>150</h3>
           <p>Certidões</p>
         </div>
+        <br>
         <div class="icon">
           <i class="ion ion-document"></i>
         </div>
@@ -113,9 +111,9 @@
       <!-- small box -->
       <div class="small-box bg-orange">
         <div class="inner">
-          <h3>150</h3>
           <p>Balanços</p>
         </div>
+        <br>
         <div class="icon">
           <i class="ion ion-ios-analytics"></i>
         </div>
@@ -127,13 +125,27 @@
       <!-- small box -->
       <div class="small-box bg-purple">
         <div class="inner">
-          <h3>150</h3>
           <p>Declarações</p>
         </div>
+        <br>
         <div class="icon">
           <i class="ion ion-document"></i>
         </div>
         <a href="#" [routerLink]="['/list-declaracoes']"  class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+
+    <div class="col-lg-3 col-xs-6" *ngIf="auth.getUser().id_perfil == 3">
+      <!-- small box -->
+      <div class="small-box bg-red-gradient">
+        <div class="inner">
+          <p>Parcelamentos</p>
+        </div>
+        <br>
+        <div class="icon">
+          <i class="ion ion-document"></i>
+        </div>
+        <a href="#" [routerLink]="['/list-parcelamentos']"  class="small-box-footer">Detalhes <i class="fa fa-arrow-circle-right"></i></a>
       </div>
     </div>
     <!-- ./col -->

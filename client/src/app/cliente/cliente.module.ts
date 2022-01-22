@@ -10,6 +10,7 @@ import {CpfCnpjModule} from "ng2-cpf-cnpj";
 import {NgxLoadingModule} from 'ngx-loading';
 import {NgxPaginationModule} from "ngx-pagination";
 import { UpdateClienteModalComponent } from './update-cliente-modal/update-cliente-modal.component';
+import {NgxMaskModule} from 'ngx-mask';
 
 
 
@@ -25,6 +26,7 @@ import { UpdateClienteModalComponent } from './update-cliente-modal/update-clien
         CpfCnpjModule,
         NgxLoadingModule,
         NgxPaginationModule,
+        NgxMaskModule,
 
     ]
 })

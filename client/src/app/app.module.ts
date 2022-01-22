@@ -23,7 +23,8 @@ import {LayoutModule} from './layout/layout.module';
 import {ngxLoadingAnimationTypes, NgxLoadingModule} from 'ngx-loading';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {MensagemModule} from './mensagem/mensagem.module';
-import {UsuarioModule} from "./usuario/usuario.module";
+import {UsuarioModule} from './usuario/usuario.module';
+import {NgxMaskModule} from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {UsuarioModule} from "./usuario/usuario.module";
     UsuarioModule,
     ModalModule.forRoot(),
     AlertModule.forRoot(),
+    NgxMaskModule.forRoot(),
     NgxPaginationModule,
     NgxLoadingModule.forRoot({animationType: ngxLoadingAnimationTypes.circle,
       backdropBorderRadius: '4px',

@@ -91,6 +91,7 @@
           <th>Mês</th>
           <th>Ano</th>
           <th>Descrição</th>
+          <th>Data Registro</th>
           <th>Arquivo</th>
           <th>Editar</th>
           <th>Excluir</th>
@@ -108,6 +109,7 @@
           <td>{{documento.mes ? documento.mes : 'Não se aplica'}}</td>
           <td>{{documento.ano ? documento.ano : 'Não se aplica'}}</td>
           <td>{{documento.descricao ? documento.descricao : 'Sem descrição'}}</td>
+          <td>{{documento.dataCriacao | date:'dd/MM/yyyy HH:mm:ss'}}</td>
           <td>
             <button type="button"
                       (click)="downloadFile(documento.md5_arquivo)"

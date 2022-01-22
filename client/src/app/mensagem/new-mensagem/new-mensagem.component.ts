@@ -31,7 +31,7 @@ export class NewMensagemComponent implements OnInit {
         this.alertService.success(response.message);
         this.loading = false;
       }, error => {
-        this.alertService.error(error);
+        this.alertService.error(error.message);
         this.loading = false;
       });
   }

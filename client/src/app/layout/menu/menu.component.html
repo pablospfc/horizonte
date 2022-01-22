@@ -40,12 +40,12 @@
       </li>
       <li *ngIf="auth.getUser().id_perfil != 2">
         <a href="#" [routerLink]="['/list-faturamentos']">
-          <i class="fa fa-money"></i> <span>Faturamento</span>
+          <i class="fa fa-money"></i> <span>Impostos</span>
         </a>
       </li>
       <li *ngIf="auth.getUser().id_perfil != 2">
         <a href="#" [routerLink]="['/list-balancetes']">
-          <i class="fa fa-line-chart"></i> <span>Balancetes</span>
+          <i class="fa fa-line-chart"></i> <span>Balanços</span>
         </a>
       </li>
       <li *ngIf="auth.getUser().id_perfil != 2">
